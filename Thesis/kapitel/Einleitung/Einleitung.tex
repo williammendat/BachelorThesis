@@ -21,15 +21,17 @@ Embedded Systems können dabei grundsätzlich zwischen zwei Plattformen untersch
 Deeply Embedded Systems sind die wesentlichen Bausteine des Internet of Things
 \cite{HochschuleniederrheimDeeply}. Die Anwendung,
 die bei Deeply Embedded Systems implementiert wird, basiert auf speziell angepassten
-Echtzeitbetriebssystemen, den Programmiersprachen C oder C++ und ganz speziellen GUI-Frameworks
-wie zum Beispiel TouchGFX.
+Echtzeitbetriebssystemen, den Programmiersprachen C oder C++ und ganz speziellen
+\ac{gui}-Frameworks\footnote{In der Softwareentwicklung ist ein Framework ein Entwicklungsrahmen,
+    der dem Anwendungsprogrammierer zur Verfügung steht, um die grundlegende Architektur der
+    Software zu bestimmen \cite{WasIstEinFramework}.} wie zum Beispiel TouchGFX.
 \newline
 \newline
 Anders als bei den Deeply Embedded Systems, die sehr auf speziellen Technologien aufbauen, bieten
 Open Embedded Systems eine höhere Flexibilität in Sachen Technologien an. Dem Programmierer ist
 also die Möglichkeit gegeben, unterschiedliche Technologien sowohl als auch unterschiedliche
 Programmiersprachen zu verwenden. Dort gilt bis dato die Kombination von C++ und Qt für
-GUI-lastige Systeme als „State of the Art“.
+\ac{gui}-lastige Systeme als „State of the Art“.
 \newline
 \newline
 Die Konstellation zwischen C++ und Qt hat bislang auch funktioniert, jedoch kommt dieser Ansatz
@@ -40,7 +42,7 @@ schlechtere Qualität und längere Produktionszeiten.
 \newline
 Um diesen Problemen zu entgegnen, soll in dieser Abschlussarbeit ein anderer Ansatz betrachtet
 werden. Und zwar könnten sowohl die Anwendungsschicht als auch die Persistenzschicht als .Net
-Core Anwendungen implementiert werden. Als GUI-Technologie soll dabei die neue
+Core Anwendungen implementiert werden. Als \ac{gui}-Technologie soll dabei die neue
 Microsofttechnologie namens \emph{Blazor} als Qt Ersatz zum Einsatz kommen. Somit kann erreicht
 werden, die komplette Codebasis mit .Net Core auszutauschen und eine Programmier-freundlichere
 Umgebung für Entwickler im Open Embedded Systems zu erschaffen.

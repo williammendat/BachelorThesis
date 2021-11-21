@@ -1,3 +1,19 @@
 \subsection{Hardware}
 \label{subsec:EmbeddedHardware}
-Test
+Die einzelnen Komponenten, die in einem eingebetteten System verbaut worden sind, entscheiden über
+die vorhandene Leistung, den Stromverbrauch und die Robustheit, die dieses System ausmachen. Die
+kern Komponente eines eingebetteten Systems wird durch einen Prozessor repräsentiert und
+werden häufig als \emph{System on Chip} eingebaut. Dabei ist die Tendenz zu den ARM-Core Modellen
+steigend. Neben dem Prozessor befinden sich typischerweise auf den eingebetteten Systemen noch
+weitere Komponenten, wie zum Beispiel dem Hauptspeicher, dem persistenten Speicher und diversen
+Schnittstellen, um weitere peripherie Geräte anzuschließen \cite{EmbeddedLinuxQuade}[vgl.].
+\newline
+\newline
+Damit weitere peripherie Geräte angeschlossen werden können, müssen mittels einigen Leitungen,
+digitale Signale übertragen werden. Aufgrund dessen, dass Leitungen typischerweise nur über eine
+begrenzte Leistung verfügen, werden Treiber eingesetzt, um peripherie Geräte zu verbinden.
+Nicht selten kommt es vor, dass in einem eingebetteten System darüber hinaus noch eine galvanische
+Entkopplung\footnote{Unter der galvanischer Entkopplung versteht man das Vermeiden der
+elektrischen Leitung zwischen zwei Stromkreisen, zwischen denen Leistung oder Signale
+ausgetauscht werden sollen \cite{galvanischeEntkopplungErklaert}} eingebaut wird, damit die Hardware
+vor Störungen von außen, wie Beispiel Motoren, geschützt ist \cite{EmbeddedLinuxQuade}[vgl.].
