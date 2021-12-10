@@ -1,0 +1,42 @@
+\section{Komponenten}
+\label{subsec:komponenten}
+Anders als es bei Qt der Fall ist, basiert Blazor wie andere Web-Frameworks auf \emph{Html} und
+\emph{Css}. Das bedeutet, dass der Entwickler auf jedes Html element zugreifen kann, das
+existiert. Weitergehend hat der Entwickler noch die möglichkeit auf zusätzliche Infragistics wie
+zum Beispiel \emph{MadBlazor} oder \emph{Ignite UI} zurückzugreifen.
+\newline
+\newline
+Außerdem bietet Blazor zusätzlich noch die Möglichkeit eigene Komponenten zu erstellen. Eine
+Komponente, im Sinne von Web-Frameworks, kann sich so wie eine Methode in einer Programmiersprache
+vorgestellt werden, das heißt, es kann eine Html und Css Sequenz ausgelagert werden, um diese an
+mehrere Stellen zu verwenden. Hinzukomment kann eine Komponente, in Blazor, in zwei Varianten
+vorkommen. Einmal als eine \emph{Page-Komponente} und einer \emph{Non-Page-Komponente}. Der
+Unterschied zwischen den beiden ist, dass man eine Page-Komponente durch eine URL adressieren
+kann, das heißt, dass diese Komponente als eigenständige Seite einer Webseite angesehen werden
+kann und eine Non-Page-Komponenten, wirklich nur die Sequenz von Html und Css darstellt.
+
+\lstinputlisting[language={[Sharp]C},caption={Page-Komponente Beispiel},
+    label=lst:counterpage]{\srcloc/StandDerTechnik/Counter.cs}
+
+Listing \ref{lst:counterpage} zeigt eine Page-Komponete, die sowohl einen Text und einen Button
+anzeigt und den momentane wert von \emph{currentCount} um eins erhöht wenn der Button betätigt
+wird. Bei der Komponente handelt es sich um eine Page-Komponeten, da dises mit dem \emph{@page}
+in der ersten Zeile ausgezeichnet ist.
+\newline
+\newline
+Einer Komponente, sei es nun eine Page-Komponente oder Non-Page-Komponete, können auch einen oder
+mehrere Parameter von der Oberkomponente mitgegeben werden. Dies hat den Vorteil, dass
+Komponenten mehr an flexibilität gewinnen und somit besser wiederzuverwenden sind, wie im
+folgenden Beispiel zu sehen ist:
+\lstinputlisting[language={[Sharp]C},caption={Kind Komponente},
+    label=lst:childkomponente]{\srcloc/StandDerTechnik/Child.razor}
+
+\lstinputlisting[language={[Sharp]C},caption={Eltern Komponente},
+    label=lst:parentkomponente]{\srcloc/StandDerTechnik/Parent.razor}
+
+Wie in Listing \ref{lst:childkomponente} zu sehen ist, hat diese Komponente einen Parameter, die
+sie dann, wie hier im Beispiel, als Title in einem \emph{<h2>-Tag} darstellt. Listig
+\ref{lst:parentkomponente} kann dann gebrauch von der Kind Komponente machen und ihr einen Title
+mitgeben. Der Html Tag der Kind Komponente, wird du den Dateinamen der Komponente erzeugt, das
+bedeutet, da die Komponente \emph{Child.razor} im Projekt heißt, wird diese dann auch mittels dem
+\emph{<Child>-Tag} verwendet.
