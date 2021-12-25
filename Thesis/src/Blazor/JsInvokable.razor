@@ -1,0 +1,16 @@
+﻿@page "/jsInvokable"
+@inject IJSRuntime _js
+
+<h1>Javascript Invokable</h1>
+
+<button onclick="showGeneratedMessage()">Click Me</button>
+
+@code {
+
+    [JSInvokable]
+    public static Task<string> GenerateString()
+    {
+        return Task.FromResult("This is called from Javascript");
+    }
+
+}

@@ -1,0 +1,46 @@
+\subsection{Microsoft Iot}
+\label{subsec:MicrosoftIot}
+Damit mit dem Raspberry Pi kommuniziert werden kann, können Bibliotheken verwendet werden.
+Microsoft bietet eine Iot Bibliothek an, mit der dann die Sensoren auf dem Gerät oder die LED´s auf
+dem Gerät angesteuert werden können. Die Bibliothek kann in einem Projekt entweder durch den
+\emph{Nuget Packager} eingebunden werden, oder indem die \emph{PackageReference} wie folgt, in
+der Solution Datei konfiguriert wird:
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Iot Nuget Package,
+    label=lst:IotNugetPackage]
+    <ItemGroup>
+    <PackageReference Include="Iot.Device.Bindings" Version="1.5.0-*" />
+  </ItemGroup>
+\end{lstlisting}
+
+Nun kann der Programmier zum Beispiel \emph{using Iot.Device.SenseHat} in den Code einbinden um
+auf die Sensoren des Sensehat´s zuzugreifen. Damit veranschaulicht wird, wie auf die
+Daten zugegrifen werden kann, wird ein Beispielhaftes Konsolen Programm demonstriert:
+
+\begin{lstlisting}[language={[Sharp]C}, caption=SenseHat Beispiel Programm,
+    label=lst:SenseHatBeispielProgramm]
+    public class Program
+    {
+        static void Main(string[] args)
+        {
+            using SenseHat _senseHat = new();
+
+            Console.WriteLine($"Temperatur: {_senseHat.Temperature.DegreesCelsius:0.#}\u00B0C");
+            Console.WriteLine($"Temperatur 2: {_senseHat.Temperature2.DegreesCelsius:0.#}\u00B0C");
+            Console.WriteLine($"Luftdruck: {_senseHat.Pressure.Hectopascals:0.##} hPa");
+            Console.WriteLine($"Luftfeuchtigkeit: {_senseHat.Humidity.Percent:0.#}%");
+        }
+    }
+\end{lstlisting}
+
+Der Output der bei dem Beispiel erzeugt wird, könnte so aussehen:
+
+\begin{zitat}
+    Temperatur: 38,4°C
+    \newline
+    Temperatur 2: 38,5°C
+    \newline
+    Luftdruck: 984,03 hPa
+    \newline
+    Luftfeuchtigkeit: 31\%
+\end{zitat}

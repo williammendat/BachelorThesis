@@ -12,7 +12,7 @@ Kommunikation noch REST.
 In dem folgenden Schaubild ist eine solche Architektur zu sehen:
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth, center]{StandDerTechnik/ClientServerJS}
+    \includegraphics[width=0.6\textwidth, center]{StandDerTechnik/ClientServerJS}
     \caption[Client-Server Architektur mit Javascript]{Client-Server Architektur mit Javascript}
     \label{img:clientserverjs}
 \end{figure}
@@ -27,7 +27,7 @@ Client läuft. Es handelt sich dabei um die Programmiersprache C\#, die dann auf
 ausgeführt wird, wie im folgenden zu sehen ist.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth, center]{StandDerTechnik/ClientServerCsharp}
+    \includegraphics[width=0.6\textwidth, center]{StandDerTechnik/ClientServerCsharp}
     \caption[Blazor WebAssembly Architektur]{Blazor WebAssembly Architektur}
     \label{img:clientservercsharp}
 \end{figure}
@@ -38,7 +38,7 @@ WebAssembly. WebAssembly wandelt Programmcode in nativen Bytecode um, der dann i
 im Browser ausgeführt werden kann. Dabei wird von der Sandbox aus die DOM mit hilfe von
 Javascript kontinuierlich manipuliert. Javascript verschwindet in dem Sinne also nicht komplett
 sondern wird lediglich ergänzt.
-Da für dieses Konzept als WebAssembly vonnöten ist, kann Blazor WebAssembly nicht auf Browsern
+Da für dieses Konzept also WebAssembly vonnöten ist, kann Blazor WebAssembly nicht auf Browsern
 funktionieren, die WebAssembly nicht unterstützen \cite{HierKommtBlazor}[vgl.].
 \newline
 \newline
@@ -70,12 +70,13 @@ unterstützt oder nicht.
 \newline
 \newline
 Das ganze Konzept dieser Architektur, baut drauf auf, dass beim ersten Aufruf der Seite eine
-Javascript Datei names \emph{Blazor.js} auf dem Client geladen wird. Diese Daten kommuniziert dann mit
-dem DOM und baut die Verbindung zum Server auf. Sobald die Verbindung aufgebaut ist, werden
+Javascript Datei names \emph{Blazor.js} auf dem Client geladen wird. Diese Datei kommuniziert dann
+mit dem DOM und baut die Verbindung zum Server auf. Sobald die Verbindung aufgebaut ist, werden
 kontinuierlich Nachrichten zwischen Client und Server ausgetauscht, wie im folgenden zu sehen ist:
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\textwidth, center]{StandDerTechnik/ClientServerSignalR}
+    \includegraphics[width=0.6\textwidth, center]{StandDerTechnik/ClientServerSignalR}
     \caption[Blazor Server Architektur]{Blazor Server Architektur}
     \label{img:clientserversignalR}
 \end{figure}

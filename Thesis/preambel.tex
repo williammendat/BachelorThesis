@@ -100,6 +100,37 @@
 % Einstellungen für Quelltexte
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+
+\lstdefinelanguage{JavaScript}{
+    keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+    keywordstyle=\color{blue}\bfseries,
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    ndkeywordstyle=\color{darkgray}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{purple}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    morestring=[b]',
+    morestring=[b]"
+}
+
+\newtcolorbox{zitat}[1][]{%
+    colback=block-gray,
+    grow to right by=-1mm,
+    boxrule=0pt,
+    boxsep=0pt,
+    breakable,
+    enhanced jigsaw,
+    borderline west={2pt}{0pt}{gray},
+    colbacktitle={block-gray},
+    coltitle={black},
+    fonttitle={\large\bfseries},
+    attach title to upper={},
+    #1,
+}
+
 \lstset{
       xleftmargin=0.1cm,
       basicstyle=\footnotesize\ttfamily,

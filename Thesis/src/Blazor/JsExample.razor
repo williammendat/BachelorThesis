@@ -1,0 +1,18 @@
+﻿@page "/jsExample"
+@inject IJSRuntime _js
+
+<h1>Javascript Runtime</h1>
+
+<p>@output</p>
+
+<button @onclick="CallJS">Click Me</button>
+
+@code {
+    private string output = string.Empty;
+
+    private async Task CallJS()
+    {
+        output = await _js.InvokeAsync<string>("generateString", "Mustermann");
+    }
+}
+

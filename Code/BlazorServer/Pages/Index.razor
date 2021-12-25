@@ -1,0 +1,251 @@
+@page "/"
+@implements IAsyncDisposable
+@using System.Drawing;
+@using System.Threading
+@using System.Threading.Channels
+@using System.Globalization
+@using Iot.Device.Common;
+@using Iot.Device.SenseHat;
+
+<div class="divHeader">
+    <div>
+        <h1>Raspberry Pi</h1>
+
+        <h2>Uhrzeit: @_uhrzeit</h2>
+    </div>
+
+    <div>
+        <h3>Temperature Sensor 1: @_temperatur</h3>
+        <h3>Temperature Sensor 2: @_temperatur2</h3>
+        <h3>Luftdruck: @_pressure</h3>
+        <h3>Luftfeuchtigkeit: @_humidity</h3>
+    </div>
+</div>
+
+<div class="divGrid">
+    @for (var y = 0; y < LengthY; y++)
+    {
+        @for (var x = 0; x < LengthX; x++)
+        {
+            <Button class="buttonBox @classes[copyY,copyX]"/>
+        }
+    }
+</div>
+
+@code {
+
+    private enum JoystickState {
+        EMTPY = 0,
+        Holding,
+        Up,
+        Down,
+        Right,
+        Left,
+    }
+
+    private const int LengthY = 8;
+    private const int LengthX = 8;
+
+    private string _uhrzeit;
+
+    private System.Timers.Timer _readTimer;
+    private System.Timers.Timer _setButtonTimer;
+    private Random _randomNumberGenerator;
+
+    private CultureInfo cultureInfo;
+
+    private Channel<JoystickState> _stateChannel;
+    private Task _setButtonTask;
+    private SenseHat _senseHat; 
+
+    private CancellationTokenSource _tokenSource;
+
+    string _temperatur;
+    string _temperatur2;
+    string _pressure;
+    string _humidity;
+
+    int _previousX;
+    int _previousY;
+
+    int _currentX;
+    int _currentY;
+
+    string[,] classes = new string[LengthY, LengthX];
+
+    protected override Task OnInitializedAsync()
+    {
+        _stateChannel = Channel.CreateBounded<JoystickState>(new BoundedChannelOptions(1){
+            FullMode = BoundedChannelFullMode.DropNewest,
+        });
+        _randomNumberGenerator = new();
+        cultureInfo = new("de-DE");
+        _uhrzeit = DateTime.Now.ToString("HH:mm:ss", cultureInfo);
+        _senseHat = new();
+        _tokenSource = new();
+
+        _temperatur = string.Empty;
+        _temperatur2 = string.Empty;
+        _pressure = string.Empty;
+        _humidity = string.Empty;
+
+        var cancellationToken = _tokenSource.Token;        
+
+        for (var y = 0; y < LengthY; y++)
+        {
+            for (var x = 0; x < LengthX; x++)
+            {
+                classes[y, x] = string.Empty;
+            }
+        }
+
+        _senseHat.Fill(Color.Blue);
+
+        StartTimer();
+        InitPositions();
+        SetRaspValues();
+
+        SetButtonBorder(_currentX, _currentY);
+
+        _setButtonTask = Task.Run(async () =>
+        {
+            while (true)
+            {
+                if(cancellationToken.IsCancellationRequested)
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                var state = await _stateChannel.Reader.ReadAsync();
+
+                int x = 0;
+                int y = 0;
+
+                if(state == JoystickState.Holding){
+                    SetButtonBackground(_currentX, _currentY);
+                }
+                else if(state == JoystickState.Up){
+                    y--;
+                }
+                else if(state == JoystickState.Down){
+                    y++;
+                }
+                else if(state == JoystickState.Left){
+                    x--;
+                }else if(state == JoystickState.Right){
+                    x++;
+                }
+
+                SetPositions(x, y);
+
+                RemoveButtonBorder(_previousX, _previousY);
+                SetButtonBorder(_currentX, _currentY);
+
+                await InvokeAsync(StateHasChanged);
+            }
+        });
+
+        return base.OnInitializedAsync();
+    }
+
+    private void StartTimer()
+    {
+        // Every Second
+        _readTimer = new(1000);
+        _readTimer.Elapsed += GetData;
+        _readTimer.Enabled = true;
+
+        // Every 15 Milliseconds
+        _setButtonTimer = new(15);
+        _setButtonTimer.Elapsed += WriteStateToChannel;
+        _setButtonTimer.Enabled = true;
+    }
+
+    private void InitPositions(){
+        _previousX = 0;
+        _previousY = 0;
+        _currentX = 0;
+        _currentY = 0;
+    }
+
+    private void SetPositions(int newX, int newY){
+        _previousX = _currentX;
+        _previousY = _currentY;
+
+        _currentX = (_currentX + LengthX + newX) % 8;
+        _currentY = (_currentY + LengthY + newY) % 8;
+    }
+    private void GetData(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        _uhrzeit = DateTime.Now.ToString("HH:mm:ss", cultureInfo);
+
+        SetRaspValues();
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async void WriteStateToChannel(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        _senseHat.ReadJoystickState();
+        
+        if(_senseHat.HoldingButton){
+            await _stateChannel.Writer.WriteAsync(JoystickState.Holding);
+        }
+        else if(_senseHat.HoldingUp){
+            await _stateChannel.Writer.WriteAsync(JoystickState.Up);
+        }
+        else if(_senseHat.HoldingDown){
+            await _stateChannel.Writer.WriteAsync(JoystickState.Down);
+        }
+        else if(_senseHat.HoldingLeft){
+            await _stateChannel.Writer.WriteAsync(JoystickState.Left);
+        }
+        else if(_senseHat.HoldingRight){
+            await _stateChannel.Writer.WriteAsync(JoystickState.Right);
+        } 
+    }
+
+    private void SetRaspValues()
+    {
+        _temperatur = $"{_senseHat.Temperature.DegreesCelsius:0.#}\u00B0C";
+        _temperatur2 = $"{_senseHat.Temperature2.DegreesCelsius:0.#}\u00B0C";
+        _pressure = $"{_senseHat.Pressure.Hectopascals:0.##} hPa";
+        _humidity = $"{_senseHat.Humidity.Percent:0.#}%";
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        _readTimer.Dispose();
+        _setButtonTimer.Dispose();
+        _tokenSource.Cancel();
+        _tokenSource.Dispose();
+        _senseHat.Dispose();
+    }
+
+    private void SetButtonBackground(int x, int y)
+    {
+        if (classes[y, x].Contains(" setBackground"))
+        {
+            _senseHat.SetPixel(x, y, Color.Blue);
+            classes[y, x] = classes[y, x].Replace(" setBackground", string.Empty);
+        }
+        else
+        {
+            _senseHat.SetPixel(x, y, Color.Red);
+            classes[y, x] += " setBackground";
+        }
+    }
+
+    private void RemoveButtonBorder(int x, int y){
+        if (classes[y, x].Contains(" setBorder"))
+        {
+            classes[y, x] = classes[y, x].Replace(" setBorder", string.Empty);
+        }
+    }
+
+    private void SetButtonBorder(int x, int y){
+        if (!classes[y, x].Contains(" setBorder"))
+        {
+            classes[y, x] += " setBorder"; 
+        }
+    }
+
+}

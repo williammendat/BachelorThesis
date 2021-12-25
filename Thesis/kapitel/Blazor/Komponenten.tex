@@ -11,12 +11,13 @@ Komponente, im Sinne von Web-Frameworks, kann sich so wie eine Methode in einer 
 vorgestellt werden, das heißt, es kann eine Html und Css Sequenz ausgelagert werden, um diese an
 mehrere Stellen zu verwenden. Hinzukomment kann eine Komponente, in Blazor, in zwei Varianten
 vorkommen. Einmal als eine \emph{Page-Komponente} und einer \emph{Non-Page-Komponente}. Der
-Unterschied zwischen den beiden ist, dass man eine Page-Komponente durch eine URL adressieren
+Unterschied zwischen den beiden ist, dass eine Page-Komponente durch eine URL adressieren
 kann, das heißt, dass diese Komponente als eigenständige Seite einer Webseite angesehen werden
-kann und eine Non-Page-Komponenten, wirklich nur die Sequenz von Html und Css darstellt.
+kann und eine Non-Page-Komponenten, wirklich nur die Sequenz von Html und Css darstellt
+\cite{BlazorComponents}[vgl.].
 
 \lstinputlisting[language={[Sharp]C},caption={Page-Komponente Beispiel},
-    label=lst:counterpage]{\srcloc/StandDerTechnik/Counter.cs}
+    label=lst:counterpage]{\srcloc/Blazor/Counter.cs}
 
 Listing \ref{lst:counterpage} zeigt eine Page-Komponete, die sowohl einen Text und einen Button
 anzeigt und den momentane wert von \emph{currentCount} um eins erhöht wenn der Button betätigt
@@ -29,14 +30,14 @@ mehrere Parameter von der Oberkomponente mitgegeben werden. Dies hat den Vorteil
 Komponenten mehr an flexibilität gewinnen und somit besser wiederzuverwenden sind, wie im
 folgenden Beispiel zu sehen ist:
 \lstinputlisting[language={[Sharp]C},caption={Kind Komponente},
-    label=lst:childkomponente]{\srcloc/StandDerTechnik/Child.razor}
+    label=lst:childkomponente]{\srcloc/Blazor/Child.razor}
 
 \lstinputlisting[language={[Sharp]C},caption={Eltern Komponente},
-    label=lst:parentkomponente]{\srcloc/StandDerTechnik/Parent.razor}
+    label=lst:parentkomponente]{\srcloc/Blazor/Parent.razor}
 
 Wie in Listing \ref{lst:childkomponente} zu sehen ist, hat diese Komponente einen Parameter, die
 sie dann, wie hier im Beispiel, als Title in einem \emph{<h2>-Tag} darstellt. Listig
 \ref{lst:parentkomponente} kann dann gebrauch von der Kind Komponente machen und ihr einen Title
-mitgeben. Der Html Tag der Kind Komponente, wird du den Dateinamen der Komponente erzeugt, das
+mitgeben. Der Html Tag der Kind Komponente, wird durch den Dateinamen der Komponente erzeugt, das
 bedeutet, da die Komponente \emph{Child.razor} im Projekt heißt, wird diese dann auch mittels dem
 \emph{<Child>-Tag} verwendet.

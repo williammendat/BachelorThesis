@@ -1,0 +1,103 @@
+\subsection{Raspberry Pi Daten Anzeigen}
+\label{subsec:DatenAnzeigen}
+In dieser Sektion soll nun die Logik implementiert werden, um die Daten, die vom Raspberry Pi
+kommen, auf der Benutzeroberfläche anzuzeigen. Dafür wird ein \emph{Timer} implementiert werden, der
+jede Sekunde auslöst, um dann die Daten zu lesen.
+\newline
+\newline
+Damit etwas auf der Benutzeroberfläche angezeigt werden kann, muss das \emph{Html-Markup}
+implementiert werden:
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Html-Markup,
+    label=lst:HtmlMarkup]
+<div class="divHeader">
+    <div>
+        <h1>Raspberry Pi</h1>
+
+        <h2>Uhrzeit: @_uhrzeit</h2>
+    </div>
+
+    <div>
+        <h3>Temperature Sensor 1: @_temperatur</h3>
+        <h3>Temperature Sensor 2: @_temperatur2</h3>
+        <h3>Luftdruck: @_pressure</h3>
+        <h3>Luftfeuchtigkeit: @_humidity</h3>
+    </div>
+</div>
+\end{lstlisting}
+
+Dabei signalisiert das \emph{@<name>}, dass es sich dabei um eine Variable handelt, die im Code
+deklariert wurde.
+\newline
+\newline
+Weitergehend bietet Blazor verschiedene \emph{Render-Funktionen} die nach bestimmten ereignissen
+aufgerufen werden. Wie zum Beispiel die \emph{OnInitializedAsync}, die aufgerufen wird, wenn die
+Komponente geladen wird. Diese \emph{OnInitializedAsync} kann nun dazu gebraucht werden, um die
+Variablen zu initialisieren.
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Render-Funktion: OnInitializedAsync,
+    label=lst:OnInitializedAsync]
+    protected override Task OnInitializedAsync()
+    {
+        _senseHat = new();
+        _cultureInfo = new("de-DE");
+        _uhrzeit = DateTime.Now.ToString("HH:mm:ss", _cultureInfo);
+
+        _temperatur = string.Empty;
+        _temperatur2 = string.Empty;
+        _pressure = string.Empty;
+        _humidity = string.Empty;
+
+        return base.OnInitializedAsync();
+    }
+\end{lstlisting}
+
+Nun soll zudem noch eine Hilfsfunktion \emph{SetRaspValues} geschaffen werden, die die Daten
+ausliest. Diese Funktion wird dann auch in der \emph{OnInitializedAsync} Funktion aufgerufen.
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Funktion: SetRaspValues,
+    label=lst:SetRaspValues]
+    private void SetRaspValues()
+    {
+        _temperatur = $"{_senseHat.Temperature.DegreesCelsius:0.#}\u00B0C";
+        _temperatur2 = $"{_senseHat.Temperature2.DegreesCelsius:0.#}\u00B0C";
+        _pressure = $"{_senseHat.Pressure.Hectopascals:0.##} hPa";
+        _humidity = $"{_senseHat.Humidity.Percent:0.#}%";
+    }
+\end{lstlisting}
+
+Damit die Daten jedoch nicht nur einmal am Anfang gelesen werden, sondern sich kontinuierlich
+aktuallisieren, soll ein \emph{Timer} jede Sekunde getriggert werden, um die Daten neu zu lesen
+und dem \emph{DOM} mitzuteilen, dass sich der \emph{State} der Seite geändert hat.
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Timer: ReadTimer,
+    label=lst:ReadTimer]
+    private void StartTimer()
+    {
+        _readTimer = new(1000);
+        _readTimer.Elapsed += GetData;
+        _readTimer.Enabled = true;
+    }
+
+    private void GetData(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        _uhrzeit = DateTime.Now.ToString("HH:mm:ss", cultureInfo);
+        SetRaspValues();
+        InvokeAsync(StateHasChanged);
+    }
+\end{lstlisting}
+
+Wichtig hierbei ist jedoch, dass die Funktion \emph{StateHasChanged} manuell aufgerufen
+wurde. Dies übernimmt Blazor normalerweise schon automatisch, wenn sich Variablen der Komponente
+verändern, die angezeigt werden aber da hier die Variablen nicht auf dem \emph{Ui-Thread} geändert
+wurden, muss manuell angegeben werden, dass sich der \emph{State} geändert hat.
+\newline
+\newline
+Der momentane Stand der Seite zieht so aus:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, center]{BlazorRasp/BlazorDatenAnzeigen}
+    \caption[Zwischenstand der Blazor Demo]{Zwischenstand der Blazor Demo}
+    \label{img:BlazorDatenAnzeigen}
+\end{figure}

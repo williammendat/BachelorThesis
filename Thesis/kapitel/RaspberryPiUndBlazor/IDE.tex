@@ -1,3 +1,20 @@
 \section{Entwicklungsumgebung}
 \label{sec:entwicklungsumgebung}
-Test
+Die Entwicklungsumgebung, die in dieser Thesis eingesetzt wird, ist Visual Studio Code. Dabei
+wurde Visual Studio Code, deswegen ausgesucht, da viele Community Plugins zur Verfügung stehen,
+die das Entwickeln auf dem Raspberry Pi unterstützten. Zum einen ist die Möglichkeit gegeben,
+mithilfe von Visual Studio Code, sich Remote mit den Raspberry Pi zu verbinden und zum anderen
+existiert noch die Möglichkeit des Remote Debuggings. Beim Remote Debugging wird der Code auf dem
+Host Rechner entwickelt und auf dem Target ausgeführt.
+\newline
+\newline
+Im Zuge dieser Thesis wird sich Remote mit dem Raspberry Pi verbunden, um dann auf dem Target zu
+programmieren. Dafür muss die Extension \emph{Remote - SSH} von Microsoft in Visual Studio Code
+installiert werden. Nun kann mit der tastenkombination \emph{Strg - shift - p} ein neuer dialog
+geöffnet werden, in welchem dann die Option \emph{Remote-SSH Connect to host} ausgewählt werden
+kann. Nachdem \emph{Remote-SSH Connect to host} ausgewählt wurde, muss der befehl
+\emph{<benutzernamen>@<ip adresse>} eingegeben werden. Dabei steht der benutzername für den
+Benutzernamen des Raspberry Pi`s, der Standardmäßig \emph{pi} lautet, und die IP adresse für die Ip
+Adresse, von dem Raspberry Pi. Zuletzt muss lediglich noch das Password eingegeben werden und
+wenn alles geklappt hat, kann nun mithilfe von Visual Studio Code auf den kompletten Raspberry Pi
+zugegriffen werden.

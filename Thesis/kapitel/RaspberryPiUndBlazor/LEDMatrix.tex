@@ -1,0 +1,150 @@
+\subsection{LED-Matrix Ansteuern}
+\label{subsec:ledMatrix}
+In dieser Sektion soll nun eine \emph{8x8 Button-Matrix} erstellt werden, die die \emph{8x8
+LED-Matrix} auf dem SenseHat des Raspberry Pi´s repräsentieren soll. Dabei soll der vorhandene
+Joystick auf dem SenseHat, dazu genutzt werden um über die Button-Matrix zu navigieren und die
+LED´s zu platzieren.
+\newline
+\newline
+Dadurch, das Blazor die \emph{Razor-Syntax} verwendet, kann jegliche C\# kontrollstrucktur im
+\emph{Html-Markup} verwendet werden. So kann dies auch wie folgt genutzt werden, um die \emph{8x8
+Button-Matrix} zu erzeugen:
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Button-Matrix,
+    label=lst:ButtonMatrix]
+<div class="divGrid">
+    @for (var y = 0; y < LengthY; y++)
+    {
+        @for (var x = 0; x < LengthX; x++)
+        {
+            int copyY = y;
+            int copyX = x;
+            <Button class="buttonBox @classes[copyY,copyX]"/>
+        }
+    }
+</div>
+\end{lstlisting}
+
+Das \emph{@classes} element, ist ein pseudo Zwei-Dimensional Array aus strings, mit der dann
+Css-Klassen hinzugefügt und wieder gelöscht werden sollen. Pseudo Zwei-Dimensionales Array
+deswegen, weil diese in C\# nur statisch erxistieren, aufgrund von inperformance.
+\newline
+\newline
+Um zu ermitteln, ob und wenn ja welcher Joystick button betätigt wurde, soll auch hier wieder ein
+\emph{Timer} zum einsatzt kommen, der jedoch diesmal alle 15 Millisekunden getriggert wird.
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Timer: ButtonTimer,
+    label=lst:ButtonTimer]
+    private void StartTimer()
+    {
+        // More Code
+
+        _setButtonTimer = new(15);
+        _setButtonTimer.Elapsed += WriteStateToChannel;
+        _setButtonTimer.Enabled = true;
+    }
+
+
+    private async void WriteStateToChannel(Object source, System.Timers.ElapsedEventArgs e)
+    {
+        if((ticks - lastTicks) > 9){
+            _senseHat.ReadJoystickState();
+            if(_senseHat.HoldingButton){
+                await _stateChannel.Writer.WriteAsync(JoystickState.Holding);
+            }
+            else if(_senseHat.HoldingUp){
+                await _stateChannel.Writer.WriteAsync(JoystickState.Up);
+            }
+            else if(_senseHat.HoldingDown){
+                await _stateChannel.Writer.WriteAsync(JoystickState.Down);
+            }
+            else if(_senseHat.HoldingLeft){
+                await _stateChannel.Writer.WriteAsync(JoystickState.Left);
+            }
+            else if(_senseHat.HoldingRight){
+                await _stateChannel.Writer.WriteAsync(JoystickState.Right);
+            }
+            lastTicks = ticks;
+        }
+        ticks++;
+    }
+\end{lstlisting}
+
+Bei \emph{JoystickState} handelt es sich um ein Enum, welches den \emph{State} des Joysticks
+repräsentieren soll. Wie zu sehen ist, wird der aktuelle \emph{State} des Joysticks gelesen um
+dann das Ergebnis in einen \emph{Channel} zu schreiben. Für diesen Timer, wurde bewust das
+Konzept von \emph{Channels} genutzt, anstatt die Berechnungen und die State-Änderung direkt im
+Timer zu Implementieren, da der \emph{Timer} alle 15 Millisekunden ausgelöst wird und dadurch
+vermieden werden sollte, dass das Programm im Timer hängen bleibt.
+\newline
+\newline
+Für die Verarbeitung des \emph{States}, wird in \emph{OnInitializedAsync} ein Task gestartet, der
+in einer \emph{endless-loop} läuft und darauf warte, bis etwas in den \emph{Channel} hinzugefügt
+wurde. Sobald sich der \emph{State} geändert hat, passiert abhängig von dem Event, wie folgend zu
+sehen sein wird, das entweder die Position berechnet wird, oder die LED und der Button an dieser
+Position, die Farbe wechselt.
+
+\begin{lstlisting}[language={[Sharp]C}, caption=Task zum Verarbeiten des States,
+    label=lst:StateTask]
+        _setButtonTask = Task.Run(async () =>
+        {
+            while (true)
+            {
+                if(cancellationToken.IsCancellationRequested)
+                    cancellationToken.ThrowIfCancellationRequested();
+                var state = await _stateChannel.Reader.ReadAsync();
+                int x = 0;
+                int y = 0;
+                if(state == JoystickState.Holding){
+                    SetButtonBackground(_currentX, _currentY);
+                }
+                else if(state == JoystickState.Up){
+                    y--;
+                }
+                else if(state == JoystickState.Down){
+                    y++;
+                }
+                else if(state == JoystickState.Left){
+                    x--;
+                }else if(state == JoystickState.Right){
+                    x++;
+                }
+                SetPositions(x, y);
+                RemoveButtonBorder(_previousX, _previousY);
+                SetButtonBorder(_currentX, _currentY);
+                await InvokeAsync(StateHasChanged);
+            }
+        });
+
+    private void SetButtonBackground(int x, int y)
+    {
+        if (classes[y, x].Contains(" setBackground"))
+        {
+            _senseHat.SetPixel(x, y, Color.Blue);
+            classes[y, x] = classes[y, x].Replace(" setBackground", string.Empty);
+        }
+        else
+        {
+            _senseHat.SetPixel(x, y, Color.Red);
+            classes[y, x] += " setBackground";
+        }
+    }
+\end{lstlisting}
+
+Wie zu sehen ist, wird, sollte der Joystick gedrückt werden, die LED und der Button je
+nach vorherigem Zustand entweder Blau oder Rot. In den anderen Fällen, werden lediglich die neuen
+Positionen berechnet und ein Border wird gesetzt, um zu signalisieren an welcher Positon auf der
+Matrix, der momentane Fokus ist.
+\newline
+\newline
+Die komplette Anwendung sieht dann wie folgt aus:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, center]{BlazorRasp/Demo}
+    \caption[Blazor Demo]{Blazor Demo}
+    \label{img:BlazorDatenAnzeigen}
+\end{figure}
+
+Da nur Technisch relevante Code abschnitte in diesem Kapitel präsentiert wurden, ist der
+komplette Code im Anhang \ref{lst:DemoCode} zu finden.

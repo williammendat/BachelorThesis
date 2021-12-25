@@ -2,8 +2,8 @@
 \label{sec:EmbeddedSystems}
 Ein Embedded System oder auf Deutsch ein eingebettetes System, wird als eine integrierte,
 mikroelektronische Steuerung angesehen, welches meist darauf ausgelegt ist eine spezifische Aufgabe
-zu erledigen. Dabei setzt sich ein eingebettetes System auch aus dem Zusammenspiel zwischen
-Hardware und Software zusammen. Solche eingebetteten Systeme haben meist kein ausgeprägtes
+zu erledigen. Dabei setzt sich ein Embedded System auch aus dem Zusammenspiel zwischen
+Hardware und Software zusammen. Solche Embedded Systems haben meist kein ausgeprägtes
 Benutzerinterface und können weitergehend in die zwei unterklassen, Open und Deeply Embedded
 Systems unterteilt werden.
 \begin{figure}[h]
@@ -14,9 +14,9 @@ Systems unterteilt werden.
     \label{img:OpenDeeplyEmbedded}
 \end{figure}
 
-Neben der logischen Korrektheit die eingebettete Systeme an den Tag legen müssen, lassen sie sich
+Neben der logischen Korrektheit, die Embedded Systeme an den Tag legen müssen, lassen sie sich
 durch eine Reihe unterschiedlicher Anforderungen und eigenschaften von den heutzutage üblichen
-Anwedendungen abgrenzen. Unter anderem wird bei eingebettete Systeme ein sogenanntes
+Anwedendungen abgrenzen. Unter anderem wird bei Embedded Systems ein sogenanntes
 \emph{Instant on} gefordert, welches besagt, dass das Gerät unmittelbar nach dem Einschalten
 betriebsbereit sein muss \cite{EmbeddedLinuxQuade}[vgl.].
 \newline
@@ -27,17 +27,23 @@ abgebildet:
 \begin{table}[ht]
     \centering
     \begin{tabularx}{\textwidth}{md}
-        \textbf{Anforderung}     & \textbf{Beschreibung} 	\\ \hline
-        Funktionalität 			& Die Software muss schnell und korrekt sein	\\\rowcolor{Gray}
-        Preis 				    & Die Hardware darf nicht zu kostenspielig sein				\\
-        Robustheit				& Muss auch in einem rauen Umfeld funktionieren				\\\rowcolor{Gray}
-        Fast poweroff			& Muss in der Lage sein schnell das komplette System Abzuschalten \\
-        Räumliche Ausmaße		& Muss klein sein, um sich in ein System einbinden zu können	\\\rowcolor{Gray}
-        Nonstop-Betrieb			& Muss in der Lage sein, im Dauerbetrieb laufen zu können	\\
-        Lange Lebensdauer		& Muss in der Lage sein, mehr als 30 Jahre zu laufen ohne groß zu
+        \textbf{Anforderung} & \textbf{Beschreibung}                                           \\
+        \hline
+        Funktionalität   & Die Software muss schnell und korrekt sein
+        \\\rowcolor{Gray}
+        Preis           & Die Hardware darf nicht zu kostenspielig sein                 \\
+        Robustheit       & Muss auch in einem rauen Umfeld funktionieren
+        \\\rowcolor{Gray}
+        Fast poweroff     & Muss in der Lage sein schnell das komplette System Abzuschalten   \\
+        Räumliche Ausmaße  & Muss klein sein, um sich in ein System einbinden zu können
+        \\\rowcolor{Gray}
+        Nonstop-Betrieb   & Muss in der Lage sein, im Dauerbetrieb laufen zu können          \\
+        Lange Lebensdauer  & Muss in der Lage sein, teilweise mehr als 30 Jahre zu laufen ohne
+        groß zu
         verschlechtern
     \end{tabularx}
-    \caption[Anforderungen an eingebettete Systeme]{Anforderungen an eingebettete Systeme \cite{EmbeddedLinuxQuade}}
+    \caption[Anforderungen an Embedded Systems]{Anforderungen an Embedded Systems
+    \cite{EmbeddedLinuxQuade}}
     \label{table:AnforderungenEingebetteteSysteme}
 \end{table}
 

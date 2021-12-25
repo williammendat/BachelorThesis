@@ -1,0 +1,18 @@
+﻿@page "/jsIsolation"
+@inject IJSRuntime _js
+
+<h1>Javascript Isolation</h1>
+
+<p>@output</p>
+
+<button @onclick="CallJS">Click Me</button>
+
+@code {
+    private string output = string.Empty;
+
+    private async Task CallJS()
+    {
+        var jsModule = await _js.InvokeAsync<IJSObjectReference>("import", "./js/testIsolation.js");
+        output = await jsModule.InvokeAsync<string>("generateString", "Mustermann");
+    }
+}
