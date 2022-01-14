@@ -1,3 +1,25 @@
 \chapter{Analyse}
 \label{chp:analyse}
-Test
+Dieses Kapitel befasst sich mit der Laufzeitanalyse der beiden vorgestellen Frameworks. Dabei
+werden mithilfe der beiden Blazor Architekturen, \emph{Blazor Server} und \emph{Blazor
+Webassembly}, und Qt verschieden Szenarien implementiert und die verbrauchte Ausführungszeit
+dokumentiert.
+\newline
+\newline
+Um eine Analyse zwischen verschiedenen \ac{gui}-Frameworks durchzuführen, gibt es mehrere Ansätze.
+In diesem Kapitel wird auf dem Ansatz zurückgegriffen, der in \cite{JavaVsCSharp} aufgeführt ist. Dabei werden
+folgende methodiken abgedeckt.
+
+\begin{itemize}
+    \item Analyse Bedingungen
+    \item Analyse Metriken
+    \item Analyse Szenarien
+    \item Zusammenfassung der Analyse
+\end{itemize}
+
+Die Szenarien werden sich in zwei teile aufteilen. Zuerst werden kleinere Code segmente
+aufgelistet und danach werden größere Datenstrukturen analysiert und ausgewertet.
+
+\input{kapitel/Analyse/AnalyseBedingugen.tex}
+\input{kapitel/Analyse/AnalyseMetriken.tex}
+\input{kapitel/Analyse/AnalyseSzenarien.tex}

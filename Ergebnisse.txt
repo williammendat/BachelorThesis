@@ -1,0 +1,78 @@
+Analyse:
+Papers [19] and [20] were selected to adapt the
+evaluation methodology used in this study. It covers the
+evaluation conditions, evaluation scenarios, evaluation
+metrics, and software/hardware settings that were adopted
+and used to evaluate the performance of different GUI
+components; using small pieces of code corresponding to a
+specific GUI functionality. 
+
+Bedingungen für die Analyse:
+A. Evaluation Conditions
+Several evaluation conditions were taken into account in
+this research, as follows:
+● Default configurations and settings of the integrated
+development environments (IDEs) were used.
+● The same computer system with the same
+software/hardware specifications was used for the
+selected scenarios to be programmed and executed.
+● All user programs (except the used IDEs) were
+closed before conducting the experiments and
+measurements.
+● The Internet was switched off from the computer
+while evaluating the scenarios.
+● Each of the scenarios was executed 1000 times;
+then, the average execution time has been taken for
+more accuracy.
+● The execution time has been measured only for the
+execution of each code mentioned in the scenarios. 
+
+Scenarien:
+1. Creating an empty combo box. 
+2. Creating a new label. 
+3. Creating a new button.
+4. Creating a new checkbox
+5. Creating a new radio button. 
+6. Creating a new list box containing five elements. 
+7. Creating a new text field.
+8. Creating a new password field.
+9. Reading the value of a text field.
+- Writing a Label 
+- Writing a Textbox 
+11. Checking a checkbox. It was unchecked before each iteration.
+12. Checking a radio button. It was unchecked before each iteration.
+13. Unchecking a checkbox. It was checked before each iteration. 
+14. Unchecking a radio button. It was checked before each iteration. 
+15. Checking the value of a radio button. It was checked before each iteration. 
+16. Checking the value of a check box. It was checked before each iteration.
+
+Table 
+
+Tree
+
+Chart
+
+Evaluation Metrics: 
+
+Zusammenfassung: 
+
+Ergebnisse 
+#1 Qt: 0,012ms Wasm: 0,043ms Server: 0,159ms
+#2 Qt: 0,005ms Wasm: 0,041ms Server: 0,148ms
+#3 Qt: 0,005ms Wasm: 0,045ms Server: 0,149ms
+#4 Qt: 0,004ms Wasm: 0,044ms Server: 0,157ms
+#5 Qt: 0,019ms Wasm: 0,057ms Server: 0,184ms
+#6 Qt: 0,021ms Wasm: 0,064ms Server: 0,210ms
+#7 Qt: 0,000122ms Wasm 0,0099ms Server: 0,000440ms
+#8 Qt: 0,000262ms Wasm 0,0094ms Server: 0,000339ms
+#9 Qt: 0,063ms Wasm: 0,078ms Server: 0,000859ms
+
+Table: 
+Qt: 10000: 7,086 50000:21,483 100000: 41,069 500000: 183,798 1000000: 363,157
+Server: 10000:776,560ms 50000:2253,870 100000: 3404,350
+Wasm: 10000: 61,320 50000: 99.930 100000: 143,403 500000: 623,480 1000000
+
+Tree:
+Qt: 100*100:0,503 500*100:0,715 500*500:3,232
+Wasm: 100*100:34ms 500*100: 184ms 500*500: 918 ms
+Server: 100*100: 1,026ms 500*100: 5,902ms 500*500: 25,324ms
