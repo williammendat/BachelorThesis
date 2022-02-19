@@ -1,12 +1,6 @@
 \subsection{Erstellen des Projektes}
 \label{subsec:erstellenProject}
-Um eine Blazor Anwendung zu erstellen, gibt es zwei Möglichkeiten. Zum einem vom \emph{Scratch}
-aus, aus einer einfachen Konsolen Anwendung, um den notwendigen Code zu implementiert, oder zum
-anderen mit hilfe eines Templates. Microsoft bietet einige Templates für verschiedenste
-Anwendungen an, die alle samt mit der Installation von .Net kommen.
-\newline
-\newline
-Um nun die Anwendung mithilfe des Templates zu erstellen, muss der folgende Befehl in dem Teminal
+Um die Anwendung zu erstellen, muss der folgende Befehl im Teminal
 eingegeben werden:
 
 \begin{zitat}
@@ -14,9 +8,9 @@ eingegeben werden:
 \end{zitat}
 
 Dieser Befehl erstellt eine neue Blazor Server Anwendung, mit dem Namen \emph{MyApp} und
-konfiguriert die Anwendung ohne das Https Protokol. Der name sowie, dass kein Https konfiguriert
-wird, sind optionale Parameter, die nicht mit angegeben werden müssen. Nachdem die Anwendung 
-erfolgreich Installiert wurde, muss noch die Codezeile \emph{webBuilder.UseUrls("Http://*:5000");
+konfiguriert die Anwendung ohne das HTTPS-Protokol. Der Name sowie dass kein Https konfiguriert
+wird sind optionale Parameter, die nicht mit angegeben werden müssen. Nachdem die Anwendung
+erfolgreich installiert wurde, muss die Codezeile \emph{webBuilder.UseUrls("Http://*:5000");
 } in der \emph{Program.cs} angegeben werden, um die Anwendung für alle Geräte im LAN verfügbar
 ist. Der Code in der \emph{Program.cs} sieht dann folgendermaßen aus:
 
@@ -36,10 +30,9 @@ ist. Der Code in der \emph{Program.cs} sieht dann folgendermaßen aus:
     }
 \end{lstlisting}
 
-Mit dem Befehl \emph{dotnet run} kann die Anwendung dann gestartet werden. Sobald das Programm
-gestartet ist, kann mit dem Link \emph{http://<ip>:5000} die Seite erreicht werden. Sollte alles
-geklappt haben sollte nun die Seite, mit den schon vom Template gegebenen Komponenten, wie folgt
-angezeigt werden:
+Mit dem Befehl \emph{dotnet run} kann die Anwendung gestartet werden. Sobald das Programm
+gestartet ist, kann mit dem Link \emph{http://<ip>:5000} die Seite erreicht werden. Die
+aufgerufene Seite sollte wie folgt angezeigt werden:
 
 \begin{figure}[h]
     \centering

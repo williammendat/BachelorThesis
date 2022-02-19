@@ -1,9 +1,9 @@
 \subsection{Code-Segmente}
 \label{subsec:CodeSegemente}
 Im folgendem werden 9 Szenarien aufgeführt. Da sich jedoch die Technologien Blazor und Qt stark
-unterscheiden, konnte nicht immer die gleiche Struktur angewendet werden. So kam es dann dazu,
+unterscheiden, konnte nicht immer die gleiche Struktur angewendet werden. So kam es dazu,
 dass hierbei auf das gleiche Verhalten geachtet wurde, als auf die Programmierstruktur. Aus
-diesem Grund unterscheiden sich die folgenden Szenarien sehr, doch führen zum gleichen Ergebniss.
+diesem Grund unterscheiden sich die folgenden Szenarien sehr, führen jedoch zum gleichen Ergebniss.
 \newline
 \newline
 \textbf{Szenario \#1}
@@ -224,33 +224,24 @@ Den Text einer Textbox verändern.
     ui->textEdit->setText(QString::fromStdString("Text"));
 \end{zitat}
 
-Von den oben gegebenen Code segmenten resultieren folgende Ergebnisse. Die Ergebnisse werden in
-Millisekunden angegeben.
+Von den oben gegebenen Code Segmenten resultieren folgende Ergebnisse. Die Ergebnisse werden in
+Mikrosekunden angegeben.
 
-\begin{table}[ht]
+\begin{figure}[h]
     \centering
-    \begin{tabularx}{\textwidth}{accc}
-        \textbf{Szenario} & \textbf{WebAssembly} & \textbf{Server} & \textbf{Qt}
-        \\
-        \hline
-        #1   & 0,043 & 0,159 & 0,012
-        \\\rowcolor{Gray}
-        #2   & 0,041 & 0,148 & 0,005
-        \\
-        #3   & 0,045 & 0,149 & 0,005
-        \\\rowcolor{Gray}
-        #4   & 0,044 & 0,157 & 0,004
-        \\
-        #5   & 0,057 & 0,184 & 0,019
-        \\\rowcolor{Gray}
-        #6   & 0,064 & 0,210 & 0,021
-        \\
-        #7   & 0,0099 & 0,000440 & 0,000122
-        \\\rowcolor{Gray}
-        #8   & 0,0094 & 0,000339 & 0,000262
-        \\
-        #9   & 0,078 & 0,000859 & 0,063
-    \end{tabularx}
-    \caption[Ergebnisse der Analyse]{Ergebnisse der Analyse}
-    \label{table:ergebnisse}
-\end{table}
+    \includegraphics[width=0.9\textwidth, center]{Analyse/Szenarien1_5}
+    \caption[Ergebnisse der Szenarien \#1 - \#5 in Microsekunden]{Ergebnisse der Szenarien \#1 -
+    \#5
+    in Microsekunden}
+    \label{img:Szenarien1_5}
+\end{figure}
+\newline
+\newline
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth, center]{Analyse/Szenarien6_9}
+    \caption[Ergebnisse der Szenarien #6 - #9 in Microsekunden]{Ergebnisse der Szenarien #6 - #9
+    in Microsekunden}
+    \label{img:Szenarien6_9}
+\end{figure}
+\newpage

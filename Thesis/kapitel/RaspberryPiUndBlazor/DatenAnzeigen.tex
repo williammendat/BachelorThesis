@@ -1,14 +1,14 @@
-\subsection{Raspberry Pi Daten Anzeigen}
+\subsection{Raspberry Pi Daten anzeigen}
 \label{subsec:DatenAnzeigen}
-In dieser Sektion soll nun die Logik implementiert werden, um die Daten, die vom Raspberry Pi
-kommen, auf der Benutzeroberfläche anzuzeigen. Dafür wird ein \emph{Timer} implementiert werden, der
-jede Sekunde auslöst, um dann die Daten zu lesen.
+In dieser Sektion soll die Logik implementiert werden, um die Daten vom Raspberry Pi auf der
+Benutzeroberfläche anzuzeigen. Dafür wird ein
+\emph{Timer} implementiert, der die Daten liest
 \newline
 \newline
-Damit etwas auf der Benutzeroberfläche angezeigt werden kann, muss das \emph{Html-Markup}
+Damit etwas auf der Benutzeroberfläche angezeigt werden kann, muss das \emph{HTML-Markup}
 implementiert werden:
 
-\begin{lstlisting}[language={[Sharp]C}, caption=Html-Markup,
+\begin{lstlisting}[language={[Sharp]C}, caption=HTML-Markup,
     label=lst:HtmlMarkup]
 <div class="divHeader">
     <div>
@@ -30,9 +30,9 @@ Dabei signalisiert das \emph{@<name>}, dass es sich dabei um eine Variable hande
 deklariert wurde.
 \newline
 \newline
-Weitergehend bietet Blazor verschiedene \emph{Render-Funktionen} die nach bestimmten ereignissen
-aufgerufen werden. Wie zum Beispiel die \emph{OnInitializedAsync}, die aufgerufen wird, wenn die
-Komponente geladen wird. Diese \emph{OnInitializedAsync} kann nun dazu gebraucht werden, um die
+Weitergehend bietet Blazor verschiedene \emph{Render-Funktionen} die nach bestimmten Ereignissen
+aufgerufen werden. Wie zum Beispiel die \emph{OnInitializedAsync}, die aufgerufen wird, sobald die
+Komponente geladen wird. Diese \emph{OnInitializedAsync} kann nun dazu genutzt werden, um die
 Variablen zu initialisieren.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Render-Funktion: OnInitializedAsync,
@@ -52,7 +52,7 @@ Variablen zu initialisieren.
     }
 \end{lstlisting}
 
-Nun soll zudem noch eine Hilfsfunktion \emph{SetRaspValues} geschaffen werden, die die Daten
+Es soll zudem eine Hilfsfunktion \emph{SetRaspValues} geschaffen werden, die die Daten
 ausliest. Diese Funktion wird dann auch in der \emph{OnInitializedAsync} Funktion aufgerufen.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Funktion: SetRaspValues,
@@ -66,9 +66,8 @@ ausliest. Diese Funktion wird dann auch in der \emph{OnInitializedAsync} Funktio
     }
 \end{lstlisting}
 
-Damit die Daten jedoch nicht nur einmal am Anfang gelesen werden, sondern sich kontinuierlich
-aktuallisieren, soll ein \emph{Timer} jede Sekunde getriggert werden, um die Daten neu zu lesen
-und dem \emph{DOM} mitzuteilen, dass sich der \emph{State} der Seite geändert hat.
+Die Hilfsfunktion kann dann in einem Timer genutzt werden. Dieser Timer soll jede Sekunde
+aufgerufen werden, um die Werte zu aktualliesieren.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Timer: ReadTimer,
     label=lst:ReadTimer]
@@ -87,10 +86,11 @@ und dem \emph{DOM} mitzuteilen, dass sich der \emph{State} der Seite geändert h
     }
 \end{lstlisting}
 
-Wichtig hierbei ist jedoch, dass die Funktion \emph{StateHasChanged} manuell aufgerufen
-wurde. Dies übernimmt Blazor normalerweise schon automatisch, wenn sich Variablen der Komponente
-verändern, die angezeigt werden aber da hier die Variablen nicht auf dem \emph{Ui-Thread} geändert
-wurden, muss manuell angegeben werden, dass sich der \emph{State} geändert hat.
+Da die Werte in einem Timer aktuallisiert werden, kann \emph{Blazor} die Änderungen nicht
+automatisch feststellen. Dieses Verhalten kommt dadurch, da der Timer nicht auf dem
+\emph{Ui-Thread} läuft. Um \emph{Blazor} zu signalisieren, dass Änderungen
+vorhanden sind, kann manuell die Funktion \emph{StateHasChanged} aufgerufen werden. Diese
+Funktion löst einen neuen \emph{Render-Vorgang} aus.
 \newline
 \newline
 Der momentane Stand der Seite zieht so aus:

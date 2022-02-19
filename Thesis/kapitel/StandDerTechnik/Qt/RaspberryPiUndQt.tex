@@ -1,26 +1,26 @@
 \subsection{Raspberry Pi und Qt}
 \label{subsec:rasPiUndQt}
-Nachdem nun ein grober Überblick zu Qt geschaffen wurde, soll nun eine beispielhafte Anwendung
+Nachde ein grober Überblick zu Qt geschaffen wurde, soll nun eine beispielhafte Anwendung
 mithilfe von Qt auf dem Raspberry Pi implementiert werden. Bei dieser Anwendung sollen beim
-Betätigen eines Buttons, Daten von dem Raspberry Pi gelesen werden und auf der \ac{gui} angezeigt
-werden. Dieses Beispiel ist von dem Embedded Systems 2 Labor inspieriet.
+Betätigen eines Buttons Daten von dem Raspberry Pi gelesen werden und auf der \ac{gui} angezeigt
+werden. Dieses Beispiel ist von dem Embedded Systems 2 Labor inspiriert.
 
 \subsubsection{RTIMULib}
 \label{subsubsec:RTIMULib}
-Die RTIMU Bibliothek, ist eine Bibliothek, die anfänglich dazu gedacht war, mithilfe von C++ oder
-Python, einfach Daten von einem Open Embedded System zu lesen. Mitleiweile existiert diese
+Die RTIMU Bibliothek war anfändlich dazu gedacht, mithilfe von C++ oder
+Python Daten von einem Non-Deeply Embedded System zu lesen. Mitlerweile existiert diese
 Bibliothek auch für andere Sprachen wie zum Beispiel C\#.
 \newline
 \newline
 Mithilfe dieser Bibliothek sollen für dieses Beispiel die Daten von dem Raspberry Pi gelesen
 werden, um diese dann anschließend auf der \ac{gui} anzeigen zu können. Um RTIMU in einem QT
 Projekt nutzen zu können, muss die Bibliothek zunächst in der \emph{.pro} Datei eingebunden
-werden, dies geschieht, indem die Zeile \emph{LIBS += -lRTIMULib} hinzugefügt wird.
+werden. Dies geschieht, indem die Zeile \emph{LIBS += -lRTIMULib} hinzugefügt wird.
 
 \subsubsection{Hilfsklasse}
 \label{subsubsec:Hilfsklasse}
-Nachdem nun die Bibliothek hinzugefügt wurde, soll eine Hilfsklasse, als repräsentation der Daten
-erzeugt werden, die wie folgt, aufgebaut ist:
+Nachdem die Bibliothek hinzugefügt wurde, soll eine Hilfsklasse als Repräsentation der Daten
+erzeugt werden. Das folgende Listing zeigt dies auf:
 
 \begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse, label=lst:Hilfsklasse]
 class ReadData
@@ -45,8 +45,8 @@ public:
 
 \end{lstlisting}
 
-Die Klasse enthält neben dem im Listing \ref{lst:Hilfsklasse} gezeigten Code, noch weitere
-Methoden um auf die Privaten \emph{Member Variablen} zuzugreifen. Nun müssen im Konstruktor noch
+Die Klasse enthält neben dem im Listing \ref{lst:Hilfsklasse} gezeigten Code noch weitere
+Methoden, um auf die privaten \emph{Member Variablen} zuzugreifen. Nun müssen im Konstruktor noch
 die Variablen konfiguriert und initialisiert werden, dies geschieht folgendermaßen:
 
 \begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse-Konstruktor,
@@ -69,9 +69,9 @@ ReadData::ReadData()
 \end{lstlisting}
 
 Die letzte Komponente der Hilfsklasse, bildet die \emph{vRead} Methode ab, in der dann
-schlussendlich die Daten, wie folgt, gelesen werden:
+schlussendlich die Daten gelesen werden:
 
-\begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse-vRead,
+\begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse mit der Methode vRead,
     label=lst:vRead]
 void ReadData::vRead(void)
 {
@@ -105,7 +105,7 @@ Der Button wurde mit einem Slot versehen der aufgerufen wird, wenn der Button be
 dem Slot wird die vRead Methode aufgerufen, um dann die Labels zu aktualisieren. Die
 Implementierung des Slots sieht dann folgend aus:
 
-\begin{lstlisting}[language=C++, caption=Update Button Slot,
+\begin{lstlisting}[language=C++, caption=Slot Methode für den Update-Button,
     label=lst:updateSlot]
 void MainWindow::on_pbUpdate_clicked()
 {
@@ -132,11 +132,11 @@ void MainWindow::on_pbUpdate_clicked()
 
 \end{lstlisting}
 
-Das vollständige Programm wird dann in Abbildung \nameref{img:qtGui} dargestellt.
+Das vollständige Programm ist in der folgenden Abbildung dargestellt
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.55\textwidth, center]{StandDerTechnik/QtGUI}
-    \caption[Open Embedded System GUI]{Open Embedded System GUI}
+    \caption[GUI der beispielhaften Anwendung]{GUI der beispielhaften Anwendung}
     \label{img:qtGui}
 \end{figure}

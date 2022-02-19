@@ -1,26 +1,25 @@
 \section{Installation}
 \label{sec:installation}
-Da in der vorherigen Sektion \emph{\nameref{sec:entwicklungsumgebung}}, Visual Studio Code eingerichtet wurde und mit dem Raspberry Pi
-Remote verbunden wurde, kann nun auch das integrierte Terminal von Visual Studio Code für die
+Da in der vorherigen Sektion \emph{\nameref{sec:entwicklungsumgebung}} Visual Studio Code
+eingerichtet wurde und mit dem Raspberry Pi
+Remote verbunden wurde, kann auch das integrierte Terminal von Visual Studio Code für die
 Installation von .Net Core beziehungsweise .Net verwendet werden.
 \newline
 \newline
 Zuallererst muss überprüft werden, ob es sich bei dem Raspberry Pi um die 32-bit oder die 64-bit
 version handelt. Dies kann mit dem befehl \emph{uname -a} überprüft werden. Dabei können folgende
-zwei ergebnisse erfolgen:
+zwei Ergebnisse erfolgen:
 \begin{zitat}
     Linux raspberrypi 4.19.97-v7l+ #1294 SMP Thu Jan 30 13:23:13 GMT 2020 armv7l GNU/Linux
     \newline
     Linux raspberrypi 5.10.60-v8+ #1291 SMP Thu Jan 30 13:21:14 GMT 2020 aarch64 GNU/Linux
 \end{zitat}
-Sollte das Resultat nun \emph{armv7l GNU/Linux} anzeigen, dann handelt es sich bei dem Raspberry
-Pi um die 32-bit version, sollte aber \emph{aarch64 GNU/Linux} angezeigt werden, dann ist es die
-64-bit version.
+Beim ersten Ergebniss handelt es sich um 32-Bit version und beim zweiten um die 64-Bit version.
 \newline
 \newline
-Nun kann entweder auf der offiziellen Microsoft seite, die richtige SDK heruntergeladen werden,
-oder mithilfe von \emph{wget} die SDK vom Terminal heruntergeladen werden. Nachdem der Download
-beendet ist, können mit den folgenden befehlen, die Installation beendet werden:
+Die jeweilige SDK kann entweder auf der offiziellen Microsoftseite oder in einem Terminal mit dem
+befehl \emph{wget} heruntergeladen werden. Nachdem der Download
+beendet ist, können mit den folgenden Befehlen die Installation beendet werden:
 \begin{zitat}
     mkdir -p \$HOME/dotnet
     \newline
@@ -32,7 +31,7 @@ beendet ist, können mit den folgenden befehlen, die Installation beendet werden
 \end{zitat}
 
 Diese Befehle erstellen einen neuen Ordner namens \emph{dotnet}, entpacken die SDK und packen den
-Inhalt in den neu erstellten Ordner und setzten zu guter letzt noch die \emph{Path-Variable} zu
+Inhalt in den neu erstellten Ordner und setzten zu guter Letzt noch die \emph{Path-Variable} zu
 dem dotnet Ordner.
 \newline
 \newline

@@ -1,0 +1,31 @@
+\subsection{Zusammenfassung}
+\label{subsec:zusammenfassung}
+Das primäre Ziel dieser Laufzeitanalyse war es, die Performance von den zwei \ac{gui}-Frameworks
+zu testen. Die Ergebnisse dieser Laufzeitanalyse zeigten, dass Qt Blazor in fast allen
+vorgestellten Szenarien überlegen war. Lediglich beim Szenario #9 \emph{Den Text einer Textbox
+verändern} zeigte sich, dass die Blazor Server-Architektur leicht überlegen war.
+\newline
+\newline
+Ein möglicher Grund für die Überlegenheit von Qt könnte sein, dass Qt, anders als Blazor, eine
+native Desktopanwendung ist. Weitergehend könnte der Faktor, dass C++
+eine sehr Hardwarenahe Programmiersprache ist, einen großen Teil zu der Überlegenheit von Qt
+beitragen.
+\newline
+\newline
+Interessant war jedoch auch das Verhalten der beiden Blazor-Architekturen zu beobachten. Werden
+die ersten sechs vorgestellten Szenarien betrachtet, in denen etwas generiert wurde, dann zeigt
+sich, dass die WebAssembly-Architektur wesentlich schneller als die Server-Architektur scheint.
+Dies könnte möglicherweise daran liegen, dass die Server-Architektur, die generierten Elemente
+erst zum Browser senden muss, damit der Browser diese anzeigen kann.
+\newline
+\newline
+Anders scheint es bei den Szenarien sieben bis neun, bei denen etwas gelesen oder geschrieben
+wurde. Dort zeigt sich die Server-Architektur als wesentlich performanter. Hier könnte die
+Überlegenheit daran liegen, da die Server-Architektur, die Daten schon lokal zur Verfügung hat
+und die Daten direkt verarbeiten kann.
+\newline
+\newline
+Werden die Ergebnisse der Tabellenstruktur und der Baumstruktur gegenübergestellt, so könnte
+behauptet werden, dass die Server-Architektur performanter scheint, wenn mit kleineren
+Datenmengen gearbeitet wird und die WebAssembly-Architektur dann performanter ist, wenn mit sehr
+großen Datenmengen gearbeitet wird.

@@ -1,15 +1,13 @@
 \subsection{Widgets}
 \label{subsec:widgets}
-Um eine \ac{gui} gestalten zu können braucht es Komponenten, die auf der \ac{gui} angezeigt
-werden können. Qt verwendet dafür sogenannte \emph{Widgets}. Widgets sind also grafische
-Komponenten, die dafür genutzt werden können, um die Benutzeroberfläche nach belieben zu
-gestalten. Ein Beispiel für eine solche Komponente wäre ein Button, welcher in der Sektion
+Zur Entwicklung einer \ac{gui} werden grafische Komponenten benötigt. Qt verwendet dafür sogenannte \emph{Widgets}. Widgets sind grafische
+Komponenten um die Benutzeroberfläche zu gestalten. Ein Beispiel für eine solche Komponente wäre ein Button, welcher in der Sektion
 \emph{\nameref{subsec:programmierbeispiel}} als \emph{btnExit} vorkam.
 \newline
 \newline
-Die Widgets, die Qt zur verfügung stellt sind in einer großen Klassenhierarchie zusammengesetzt
-und diese Hierarchie könnte sich wie folgt vorgestellt werden:
-
+Die Widgets, die Qt zur Verfügung stellt sind in einer großen Klassenhierarchie zusammengesetzt
+und diese Hierarchie könnte sich wie folgt dargestellt werden:
+\newpage
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth, center]{StandDerTechnik/qtWidgetClassHierachie}
@@ -18,9 +16,10 @@ und diese Hierarchie könnte sich wie folgt vorgestellt werden:
     \label{img:qtWidgetClassHierachie}
 \end{figure}
 
-Wie zu sehen ist, ist ganz oben in der Klassenhierarchie die \emph{QObject} Klasse. Diese
-enthällt unter anderem den Signal und Slot mechanismus, welcher später noch genau erklärt wird.
-Weitergehend, werden Widgets, die gemeinsame Funktionalitäten aufweisen zusammen grupiert. Diese
-Verhalten ist bei \emph{QPushButton} und \emph{QRadioButton} erkennbar, denn beide Widgets sind
+Als Basisklasse ist ganz oben in der Klassenhierarchie die \emph{QObject} Klasse. Diese
+enthält unter anderem den Signal- und Slot-Mechanismus. Auf diesen soll später noch genauer
+eingegangen werden.
+Weitergehend werden Widgets, die gemeinsame Funktionalitäten aufweisen zusammen gruppiert. Diese
+Verhalten ist bei \emph{QPushButton} und \emph{QRadioButton} erkennbar. Beide Widgets sind
 Buttons, die sich Teilweise die gleichen Eigenschaften und Funktionen teilen
 \cite{GettingStartedQt}[vgl.].

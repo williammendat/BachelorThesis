@@ -1,13 +1,13 @@
-\subsection{LED-Matrix Ansteuern}
+\subsection{LED-Matrix ansteuern}
 \label{subsec:ledMatrix}
 In dieser Sektion soll nun eine \emph{8x8 Button-Matrix} erstellt werden, die die \emph{8x8
-LED-Matrix} auf dem SenseHat des Raspberry Pi´s repräsentieren soll. Dabei soll der vorhandene
-Joystick auf dem SenseHat, dazu genutzt werden um über die Button-Matrix zu navigieren und die
-LED´s zu platzieren.
+LED-Matrix} auf dem Sensehat des Raspberry Pi repräsentieren soll. Dabei soll der vorhandene
+Joystick auf dem Sensehat dazu genutzt werden, um über die Button-Matrix zu navigieren und die
+LED zu platzieren.
 \newline
 \newline
-Dadurch, das Blazor die \emph{Razor-Syntax} verwendet, kann jegliche C\# kontrollstrucktur im
-\emph{Html-Markup} verwendet werden. So kann dies auch wie folgt genutzt werden, um die \emph{8x8
+Da Blazor die \emph{Razor-Syntax} verwendet, kann jegliche C\# Kontrollstruktur im
+\emph{HTML-Markup} verwendet werden. So kann dies auch wie folgt genutzt werden, um die \emph{8x8
 Button-Matrix} zu erzeugen:
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Button-Matrix,
@@ -25,13 +25,10 @@ Button-Matrix} zu erzeugen:
 </div>
 \end{lstlisting}
 
-Das \emph{@classes} element, ist ein pseudo Zwei-Dimensional Array aus strings, mit der dann
-Css-Klassen hinzugefügt und wieder gelöscht werden sollen. Pseudo Zwei-Dimensionales Array
-deswegen, weil diese in C\# nur statisch erxistieren, aufgrund von inperformance.
-\newline
-\newline
-Um zu ermitteln, ob und wenn ja welcher Joystick button betätigt wurde, soll auch hier wieder ein
-\emph{Timer} zum einsatzt kommen, der jedoch diesmal alle 15 Millisekunden getriggert wird.
+Das \emph{@classes} Element ist ein Zwei-Dimensional Array aus Strings, mit der
+Css-Klassen hinzugefügt und wieder gelöscht werden sollen. Um zu ermitteln, welcher
+Joystick-Button betätigt wurde, soll ein weiterer
+\emph{Timer} zum Einsatz kommen. Dieser Timer soll alle 15 Millisekunden ausgelöst werden.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Timer: ButtonTimer,
     label=lst:ButtonTimer]
@@ -71,18 +68,14 @@ Um zu ermitteln, ob und wenn ja welcher Joystick button betätigt wurde, soll au
 \end{lstlisting}
 
 Bei \emph{JoystickState} handelt es sich um ein Enum, welches den \emph{State} des Joysticks
-repräsentieren soll. Wie zu sehen ist, wird der aktuelle \emph{State} des Joysticks gelesen um
-dann das Ergebnis in einen \emph{Channel} zu schreiben. Für diesen Timer, wurde bewust das
-Konzept von \emph{Channels} genutzt, anstatt die Berechnungen und die State-Änderung direkt im
-Timer zu Implementieren, da der \emph{Timer} alle 15 Millisekunden ausgelöst wird und dadurch
-vermieden werden sollte, dass das Programm im Timer hängen bleibt.
+repräsentieren soll. Wie zu sehen ist, wird der aktuelle \emph{State} des Joysticks gelesen um,
+dann das Ergebnis in einen \emph{Channel} zu schreiben.
 \newline
 \newline
 Für die Verarbeitung des \emph{States}, wird in \emph{OnInitializedAsync} ein Task gestartet, der
-in einer \emph{endless-loop} läuft und darauf warte, bis etwas in den \emph{Channel} hinzugefügt
-wurde. Sobald sich der \emph{State} geändert hat, passiert abhängig von dem Event, wie folgend zu
-sehen sein wird, das entweder die Position berechnet wird, oder die LED und der Button an dieser
-Position, die Farbe wechselt.
+in einer Endlosen schleife läuft und darauf warte bis etwas in den \emph{Channel} hinzugefügt
+wurde. Sobald sich der \emph{State} geändert hat, wird entweder die Position berechnet oder
+die LED an dieser Position neu eingefärbt.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Task zum Verarbeiten des States,
     label=lst:StateTask]
@@ -131,13 +124,8 @@ Position, die Farbe wechselt.
     }
 \end{lstlisting}
 
-Wie zu sehen ist, wird, sollte der Joystick gedrückt werden, die LED und der Button je
-nach vorherigem Zustand entweder Blau oder Rot. In den anderen Fällen, werden lediglich die neuen
-Positionen berechnet und ein Border wird gesetzt, um zu signalisieren an welcher Positon auf der
-Matrix, der momentane Fokus ist.
-\newline
-\newline
-Die komplette Anwendung sieht dann wie folgt aus:
+Wie zu sehen ist, wird die LED und der Button je
+nach vorherigem Zustand entweder Blau oder Rot. Die komplette Anwendung sieht dann wie folgt aus:
 
 \begin{figure}[h]
     \centering
@@ -146,5 +134,5 @@ Die komplette Anwendung sieht dann wie folgt aus:
     \label{img:BlazorDatenAnzeigen}
 \end{figure}
 
-Da nur Technisch relevante Code abschnitte in diesem Kapitel präsentiert wurden, ist der
+Da nur technisch relevante Code Abschnitte in diesem Kapitel präsentiert wurden, ist der
 komplette Code im Anhang \ref{lst:DemoCode} zu finden.

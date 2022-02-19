@@ -1,55 +1,37 @@
 \subsection{Javascript Runtime}
 \label{subsec:jsruntime}
-Mithilfe des Javascript Runtime Interfaces, lassen sich Javascript Methoden aus dem C\# Code
+Mithilfe des Javascript Runtime Interfaces, lassen sich Javascript Methoden aus C\# Code
 aufrufen. In dem Interface befindet sich eine Methode names \emph{InvokeAsync}, die jedoch in zwei
-Varianten zur Verfügung steht, wie im folgenden zu sehen ist:
+Varianten zur Verfügung steht, wie im Folgenden zu sehen ist:
 \begin{itemize}
     \item ValueTask<TValue> InvokeAsync<TValue>(string, object?[]?)
     \item ValueTask<TValue> InvokeAsync<TValue>(string, CancellationToken, object?[]?)
 \end{itemize}
-Beide Varianten tun dass gleiche, mit dem einzigen Unterschied, dass bei der zweiten Variante
-zusätzlich noch eine \emph{CancellationToken} mitgegeben werden kann, um den Vorgang manuell
+Der zweiten Funktion kann ein \emph{CancellationToken} mitgegeben werden, um die Methode manuell
 abzubrechen \cite{JsRuntime}[vgl.].
 \newline
 \newline
-Des Weiteren gilt für die Verwendung des Javascript Runtime Interface folgendes:
+Des Weiteren gilt für die Verwendung des Javascript Runtime Interface Folgendes:
 \begin{itemize}
-    \item Der \emph{string} Parameter in InvokeAsync, steht für den Javascript Methodennamen
-    \item Der \emph{object?[]?} Parameter ist ein Array von objekten, die dazu genutzt werden um
-    der Javascript Methode, die Parameter zu übergeben
-    \item TValue ist ein Template Objekt, welches dann als Rückgabewert benutzt werden kann,
-    zudem muss das Objekt mithilfe von \emph{JSON} serialisierbar sein
-    \item Der Javascript code muss unter dem Verzeichnis \emph{wwwroot} vorhanden sein
-    \item Um von diesem Mechanismus gebrauch machen zu können muss in die Komponente, das
+    \item Der \emph{string} Parameter in InvokeAsync steht für den Javascript Methodennamen.
+    \item Der \emph{object?[]?} Parameter ist ein Array von Objekten, um
+    der Javascript Methode die Parameter zu übergeben.
+    \item TValue ist ein Template-Objekt, welches dann als Rückgabewert benutzt werden kann.
+    Zudem muss das Objekt mithilfe von \emph{JSON} serialisierbar sein
+    \item Der Javascript Code muss unter dem Verzeichnis \emph{wwwroot} vorhanden sein
+    \item Um von diesem Mechanismus Gebrauch machen zu können muss, in der Komponente das
     Interface \emph{IJSRuntime} \emph{injected} werden
     \item Bei Blazor Server können Javascript Methoden erst aufgerufen werden, sobald eine der
     Signal R Channel aufgebaut ist.
 \end{itemize}
 
-Um nun diesen Mechanismus zu demonstrieren, soll im Folgenden ein Beispiel dargestellt werden, in
-welchem ein String von einer Javascript Methode erzeugt wird, und beim Betätigen eines Buttons,
-dieser String auf der Benutzeroberfläche angezeigt wird:
+Um diesen Mechanismus zu demonstrieren, soll im Folgenden ein Beispiel dargestellt werden.
+In diesem Beispiel wird ein string in einer Javascript-Methode erzeugt und zurückgegeben. Der
+erzeugte string wird dann im C\# Code abgefangen und schlussendliche auf der Benutzeroberfläche
+angezeigt.
 
-\lstinputlisting[language=JavaScript,caption={Javascript Methode Generate String},
+\lstinputlisting[language=JavaScript,caption={Javascript-Methode generateString},
     label=lst:jsMethodeGenerateString]{\srcloc/Blazor/test.js}
 
-\lstinputlisting[language={[Sharp]C},caption={Javascript Beispiel Komponente},
+\lstinputlisting[language={[Sharp]C},caption={Beispiel einer Javascript-Komponente},
     label=lst:jsExampleComponent]{\srcloc/Blazor/JsExample.razor}
-
-Im obigen Beispiel, wurde die Javascript datei global eingebuden, so dass diese von überall
-erreichbar ist. Seit .Net 5 existiert die Möglichkeit, eine Javascript datei direkt in eine
-Komponente einzubinden \cite{JSIsolation}[vgl.]. Dies nennt sich dann \emph{Javascript Isolation}
-und würde wie folgt aussehen:
-
-\lstinputlisting[language=JavaScript,caption={Javascript Isolation Generate String},
-    label=lst:jsIsolationGenerateString]{\srcloc/Blazor/testIsolation.js}
-
-Damit die Javascript nun gefunden werden kann, muss diese mit dem Keyword \emph{export}
-versehen werden.
-
-\lstinputlisting[language={[Sharp]C},caption={Javascript Isolation Beispiel},
-    label=lst:jsIsolationExample]{\srcloc/Blazor/JsIsolation.razor}
-
-Wie zu sehen ist, kann mit der \emph{InvokeAsync} Methode auch die komplette Javascript datei
-geladen werden. Sobald die Javascript Datei geladen wurde, ist der Aufruf identisch zu Listig
-\ref{lst:jsMethodeGenerateString}.

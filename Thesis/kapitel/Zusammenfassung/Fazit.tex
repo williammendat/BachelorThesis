@@ -1,3 +1,15 @@
 \chapter{Fazit}
 \label{chp:fazit}
-Test
+In dieser Abschlussarbeit wurde veranschaulicht, wie das Framework \emph{Blazor} genutzt werden
+kann, um eine Benutzeroberfläche für ein Non-Deeply Embedded System zu erstellen. Es konnte
+gezeigt werden, welche Bibliothek benutzt werden kann, um auf die Funktionalitäten eines
+Non-Deeply Embedded System zuzugreifen. In dem Entwickelten Frontend, wurden kontinuierlich Daten
+vom Raspberry Pi abgefragt, um diese dann auf der Benutzeroberfläche anzuzeigen. Im Anhang
+\ref{lst:DemoCode} befindet sich der komplett implementierte Code.
+
+Zusätzlich wurde im Umfang dieser Abschlussarbeit eine Laufzeitanalyse zwischen Qt und den beiden
+Blazor-Architekturen durchgeführt. Bei dieser Analyse stellte sich dann herraus, dass Qt in den
+meisten Fällen sich als performantesten gezeigt hat. Zudem zeigte sich ein interessantes
+Verhalten zwischen den beiden Blazor-Architekturen. Bei geringen Datenmengen, schien die
+Server-Architektur performanter als die WebAssembly-Architektur zu sein, jedoch bei großen
+Datenmengen, war die WebAssembly-Architektur deutlich besser als die Server-Architektur.

@@ -1,23 +1,20 @@
-\subsection{Microsoft Iot}
+\subsection{Microsoft IoT}
 \label{subsec:MicrosoftIot}
 Damit mit dem Raspberry Pi kommuniziert werden kann, können Bibliotheken verwendet werden.
-Microsoft bietet eine Iot Bibliothek an, mit der dann die Sensoren auf dem Gerät oder die LED´s auf
-dem Gerät angesteuert werden können. Die Bibliothek kann in einem Projekt entweder durch den
-\emph{Nuget Packager} eingebunden werden, oder indem die \emph{PackageReference} wie folgt, in
-der Solution Datei konfiguriert wird:
+Microsoft bietet eine IoT Bibliothek an, mit der dann die Sensoren auf dem Gerät oder die LEDs auf
+dem Gerät angesteuert werden können. Die Bibliothek kann wie folgt in das Projekt eingebunden
+werden:
 
-\begin{lstlisting}[language={[Sharp]C}, caption=Iot Nuget Package,
+\begin{lstlisting}[language={[Sharp]C}, caption=IoT NuGet Package,
     label=lst:IotNugetPackage]
     <ItemGroup>
     <PackageReference Include="Iot.Device.Bindings" Version="1.5.0-*" />
   </ItemGroup>
 \end{lstlisting}
 
-Nun kann der Programmier zum Beispiel \emph{using Iot.Device.SenseHat} in den Code einbinden um
-auf die Sensoren des Sensehat´s zuzugreifen. Damit veranschaulicht wird, wie auf die
-Daten zugegrifen werden kann, wird ein Beispielhaftes Konsolen Programm demonstriert:
+Das folgende beispielhafte Konsolenprogramm demonstriert, wie auf die Daten zugegriffen werden kann.
 
-\begin{lstlisting}[language={[Sharp]C}, caption=SenseHat Beispiel Programm,
+\begin{lstlisting}[language={[Sharp]C}, caption=SenseHat Beispielprogramm,
     label=lst:SenseHatBeispielProgramm]
     public class Program
     {
@@ -33,7 +30,7 @@ Daten zugegrifen werden kann, wird ein Beispielhaftes Konsolen Programm demonstr
     }
 \end{lstlisting}
 
-Der Output der bei dem Beispiel erzeugt wird, könnte so aussehen:
+Der Output durch obiges Programm sieht wie folgt aus:
 
 \begin{zitat}
     Temperatur: 38,4°C

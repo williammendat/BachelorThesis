@@ -1,33 +1,29 @@
 \subsection{Signal und Slot Konzept}
 \label{subsec:signalslot}
-Um eine Benutzeroberfläche wirklich interaktive zu gestalten, ist es vonnöten, auf bestimmte
-Ereignisse zu reagieren. Beispielsweise ist das betätigen eines Buttons ein Auslöser für ein
+Eine interaktive Benutzeroberfläche muss
+Ereignisse reagieren können. Beispielsweise ist das Betätigen eines Buttons ein Auslöser für ein
 Ereignis auf welches reagiert werden kann. Es gibt viele Methoden und Muster in welche ein
-solches Ereignis-Aktions Konzept implementiert werden kann.
+solches Ereignis-Aktionskonzept implementiert werden kann.
 
-Qt benutzt um diese Ereignis-Aktion Muster zu bewerkstelligen, das selbst entwickelte Signal und
-Slot Konzept. Ein \emph{Signal} ist im einfachen sinne eine Nachricht, die Versendet wird, um zu
-signalisieren, dass der momentane Status eines Objektes sich geändert hat. Dahingegen ist ein
-\emph{Slot} eine spezielle Funktion von einem Objekt, welche immer dann aufgerufen wird, wenn ein
+Ein \emph{Signal} ist im einfachen Sinne eine Nachricht, die versendet werden kann. Die Nachricht
+signalisiert, dass sich der momentane Status eines Objektes geändert hat. Dahingegen ist ein
+\emph{Slot} eine spezielle Funktion von einem Objekt, welche dann aufgerufen wird, wenn ein
 bestimmtes \emph{Signal} gesendet wird \cite{GettingStartedQt}[vgl.].
 
-Damit jeder \emph{Slot} auch weiß, auf welches \emph{Signal} reagiert werden soll, müssen diese
-zusammen verbunden werden. In der Sektion \emph{\nameref{subsec:programmierbeispiel}} war
+Damit jeder \emph{Slot} auch weiß, auf welches \emph{Signal} reagiert werden soll, müssen diese verbunden werden. In der Sektion \emph{\nameref{subsec:programmierbeispiel}} war
 folgende Zeile zu sehen:
 
-\begin{lstlisting}[language=C++, caption=Signal und Slot beispiel, label=lst:SignalSlotBeispiel]
+\begin{lstlisting}[language=C++, caption=Signal- und Slot-Beispiel, label=lst:SignalSlotBeispiel]
 // Connect button with the App
 QObject::connect(btnExit, SIGNAL(clicked()), &app, SLOT(quit()));
 
 \end{lstlisting}
 
-In dieser Codezeile fand die Verbindung zwischen einem Signal und einem Slot statt. Dabei wurde
-sich mit dem Button \emph{btnExit} verbunden und ein Signal gesendet, wenn der Button betätigt
-wird. Weitergehend wurde sich noch mit \emph{app} verbunden, auf welchem dann, beim Betätigen von
-btnExit, die Funktion \emph{quit} aufgerufen wird. Sobald also das Signal gesendet wird, schließt
-sich die Application.
+In dieser Codezeile fand die Verbindung zwischen einem Signal und einem Slot statt.
+Wenn der Button betätigt wird, wird \emph{app} signalisiert und ruft \emph{quit()} auf. Die
+Funktion \emph{quit()} beendet das Programm.
 
-Einer der größten Vorteile dieser Methode im gegensatz zu anderen Methoden, ist es, dass dadurch
-N zu M Beziehungen abgebildet werden können. Das bedeutet also, dass sich ein Signal mit
-beliebig viele Slots verbinden kann und dass sich ein Slot auf mehrere Signale verbinden kann
+Einer der größten Vorteile dieser Methode im Gegensatz zu anderen Methoden ist es, dass dadurch
+n:m-Beziehungen abgebildet werden können. Das bedeutet also, dass sich ein Signal mit
+beliebig viel Slots verbinden kann und dass sich ein Slot auf mehrere Signale verbinden kann
 \cite{SignalSlotMechanismus}[vgl.].

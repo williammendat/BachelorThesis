@@ -1,27 +1,27 @@
 \subsection{Javascript Invokable}
 \label{subsec:jsInvokable}
-Nun kann es auch den Fall geben, dass C\# code von Javascript aufgerufen werden muss. Dies ist in
-Blazor ebenso möglich und kann vollbracht werden, mit dem JSInvokable Attribut, die über einer
-Methode angebracht werden muss. Zudem muss die Methode als \emph{static} implementiert werden.
+Nun kann es auch den Fall geben, dass C\# code von Javascript aufgerufen werden muss. Dies wird mit
+dem \emph{JSInvokable} Attribut möglich. Die Funktion, die mit dem \emph{JSInvokable} Attribut
+erweitert wurde, muss zudem mit dem \emph{static-keyword} versehen werden.
 \newline
 \newline
-Auf Javascript seite, wird von Blazor die Methoden
+Javascript-seitig werden von Blazor die Methoden
 \begin{itemize}
     \item DotNet.invokeMethod (string, string, object[])
     \item DotNet.invokeMethodAsync (string, string, object[])
 \end{itemize}
-bereitgestellt, mit denen dann eine statische C\# Methode aufgerufen werden kann. Dabei gibt der
-Entwickler mithilfe des ersten Parameters, den Project Namen an, in der sich die statische
-Methode befindet, der zweite Parameter, ist für den Namen der aufzurufenden Methode gedacht und
-zu guter letzt können mit dem dritten Parameter noch weitere optionale Argumente übergeben werden.
+bereitgestellt, mit denen dann eine statische C\#-Methode aufgerufen werden kann. Dabei geben
+Entwickler*innen mithilfe des ersten Parameters, den Project Namen an, in der sich die statische
+Methode befindet. Der zweite Parameter, ist für den Namen der aufzurufenden Methode.
+Zu guter Letzt können mit dem dritten Parameter noch weitere optionale Argumente übergeben werden.
 \newline
 \newline
-Im folgenden, wird eine Komponente gezeigt welche beim Betätigen eines Buttons, eine Javascript
-Methode aufruft, welche wiederum einen generierten string von einer C\# Methode erhält und diese
-in einem \emph{alert} ausgibt:
-
+Im Folgenden wird eine Komponente gezeigt die eine Javascript-Methode aufruft. In der
+Javascript-Methode wird dann wiederum eine C\#-Methode aufgerufen. Das Ergebniss der C\#-Methode
+wird anschließen in einem \emph{alert} angezeigt.
+\newpage
 \lstinputlisting[language={[Sharp]C},caption={Javascript Invokable Beispiel},
     label=lst:jsInvokableExample]{\srcloc/Blazor/JsInvokable.razor}
 
-\lstinputlisting[language=JavaScript,caption={Javascript Invokable Show Generated Message},
+\lstinputlisting[language=JavaScript,caption={Javascript Invokable showGeneratedMessage},
     label=lst:jsInvokable]{\srcloc/Blazor/testInvokable.js}

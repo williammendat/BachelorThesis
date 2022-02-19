@@ -1,11 +1,15 @@
 \chapter{Einleitung}
 \label{chap:einleitung}
-Heutzutage ist die Menschheit darauf fokussiert, die komplette Welt zu digitalisieren. Dabei
-existiert ein Grundsatz, alles, was digitalisiert werden kann, soll digitalisiert werden. Um dies
-zu realisieren, ist es von Nöten, überall Hardware und Software zu verbinden. Sei es nun das
-Handy, mit welchem durch nur einem klick die Bankdaten angezeigt werden können, oder ein
+Die Menschheit ist heutzutage darauf fokussiert, die komplette Welt zu digitalisieren. Dabei
+existiert ein Grundsatz:
+\begin{zitat}
+    Alles, was digitalisiert werden kann, wird digitalisiert \cite{digitalisierteWelt}
+\end{zitat}
+
+Um dies zu realisieren ist es vonnöten überall Hardware und Software zu verbinden. Sei es nun das
+Handy, mit welchem durch nur einen klick die Bankdaten angezeigt werden können, oder ein
 selbstfahrendes Auto, welches einen Anwender selbstständig zum Ziel fährt. Dies sind nur zwei
-Bespiele von einer unendlich langen Liste. Hinter diesen technischen Wundern stecken meist
+Beispiele einer unendlich langen Liste. Hinter diesen technischen Wundern stecken meist
 mehrere Tausend kleiner Mikrocomputern und Mikrocontrollern, die dann mittels Software zusammen
 interagieren. Die Kombination dieser zwei Komponenten werden durch den Oberbegriff „Embedded
 System“ oder auch zu Deutsch ein „Eingebettetes System“ definiert.
@@ -14,36 +18,36 @@ System“ oder auch zu Deutsch ein „Eingebettetes System“ definiert.
 Embedded Systems können dabei grundsätzlich zwischen zwei Plattformen unterschieden werden:
 \begin{itemize}
     \item Deeply Embedded System
-    \item Open Embedded System
+    \item Non-Deeply Embedded System
 \end{itemize}
 \newline
 \newline
 Deeply Embedded Systems sind die wesentlichen Bausteine des Internet of Things
-\cite{HochschuleniederrheimDeeply}. Die Anwendung,
+\cite{HochschuleniederrheimDeeply}. Die Anwendungen,
 die bei Deeply Embedded Systems implementiert wird, basiert auf speziell angepassten
 Echtzeitbetriebssystemen, den Programmiersprachen C oder C++ und ganz speziellen
 \ac{gui}-Frameworks wie zum Beispiel TouchGFX.
 \newline
 \newline
 Anders als bei den Deeply Embedded Systems, die sehr auf speziellen Technologien aufbauen, bieten
-Open Embedded Systems eine höhere Flexibilität in sachen Technologien an. Dem Programmierer ist
-also die Möglichkeit gegeben, unterschiedliche Technologien, als auch unterschiedliche
-Programmiersprachen zu verwenden. Dort gilt bis dato die Kombination von C++ und Qt für
-\ac{gui}-lastige Systeme als „State of the Art“.
+Open Embedded Systems eine höhere Flexibilität in Sachen Technologien an. Von Seiten der
+Programmierung ist es möglich, unterschiedliche Technologien und Programmiersprachen zu verwenden.
+Dort gilt bis dato unter Linux, die Kombination von C++ und Qt für\ac{gui}-lastige Systeme als
+„State of the Art“.
 \newline
 \newline
-Die Konstellation zwischen C++ und Qt hat bislang auch funktioniert, jedoch kommt dieser Ansatz
-auch mit Problemen mit sich, denn die höheren Entwicklungszeiten für die Entwicklung von C++
-Anwendungen, sowie die geringe Verfügbarkeit von Experten auf dem Arbeitsmarkt sorgen für
-schlechtere Qualität und längere Produktionszeiten.
+Die Kombination aus C++ und Qt hat bislang auch funktioniert. Jedoch kommt dieser Ansatz
+auch mit Herausforderungen mit sich. Nicht nur die höheren Entwicklungszeiten für die
+Entwicklung von C++ Anwendungen, sondern auch die geringe Verfügbarkeit von Experten auf dem
+Arbeitsmarkt sorgen für schlechtere Softwarequalität und längere Produktionszeiten.
 \newline
 \newline
-Um diesen Problemen zu entgegnen, soll in dieser Abschlussarbeit ein anderer Ansatz betrachtet
+Um diesen Herausforderungen zu entgegnen, soll in dieser Abschlussarbeit ein anderer Ansatz
+betrachtet
 werden. Und zwar könnten sowohl die Anwendungsschicht als auch die Persistenzschicht als .Net
 Core Anwendungen implementiert werden. Als \ac{gui}-Technologie soll dabei die neue
 Microsoft-Technologie namens \emph{Blazor} als Qt Ersatz zum Einsatz kommen. Somit kann erreicht
-werden, die komplette Codebasis mit .Net Core auszutauschen und eine Programmier-freundlichere
-Umgebung für Entwickler im Open Embedded Systems zu erschaffen.
+werden, dass die komplette Applikation in .Net Core implementiert werden kann.
 \input{kapitel/Einleitung/Aufgabenstellung.tex}
 \input{kapitel/Einleitung/Hardware.tex}
 \input{kapitel/Einleitung/Software.tex}
