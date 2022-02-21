@@ -2,7 +2,7 @@
 \label{subsec:jsruntime}
 Mithilfe des Javascript Runtime Interfaces, lassen sich Javascript Methoden aus C\# Code
 aufrufen. In dem Interface befindet sich eine Methode names \emph{InvokeAsync}, die jedoch in zwei
-Varianten zur Verfügung steht, wie im Folgenden zu sehen ist:
+Varianten zur Verfügung steht:
 \begin{itemize}
     \item ValueTask<TValue> InvokeAsync<TValue>(string, object?[]?)
     \item ValueTask<TValue> InvokeAsync<TValue>(string, CancellationToken, object?[]?)
@@ -16,18 +16,18 @@ Des Weiteren gilt für die Verwendung des Javascript Runtime Interface Folgendes
     \item Der \emph{string} Parameter in InvokeAsync steht für den Javascript Methodennamen.
     \item Der \emph{object?[]?} Parameter ist ein Array von Objekten, um
     der Javascript Methode die Parameter zu übergeben.
-    \item TValue ist ein Template-Objekt, welches dann als Rückgabewert benutzt werden kann.
-    Zudem muss das Objekt mithilfe von \emph{JSON} serialisierbar sein
-    \item Der Javascript Code muss unter dem Verzeichnis \emph{wwwroot} vorhanden sein
-    \item Um von diesem Mechanismus Gebrauch machen zu können muss, in der Komponente das
+    \item TValue ist ein Template-Objekt, welches als Rückgabewert benutzt werden kann.
+    Zudem muss das Objekt mithilfe von \emph{JSON} serialisierbar sein.
+    \item Der Javascript Code muss unter dem Verzeichnis \emph{wwwroot} vorhanden sein.
+    \item Um diesem Mechanismus anzuwenden, muss in der Komponente das
     Interface \emph{IJSRuntime} \emph{injected} werden
-    \item Bei Blazor Server können Javascript Methoden erst aufgerufen werden, sobald eine der
+    \item Bei Blazor Server können Javascript Methoden erst aufgerufen werden, sobald der
     Signal R Channel aufgebaut ist.
 \end{itemize}
 
 Um diesen Mechanismus zu demonstrieren, soll im Folgenden ein Beispiel dargestellt werden.
-In diesem Beispiel wird ein string in einer Javascript-Methode erzeugt und zurückgegeben. Der
-erzeugte string wird dann im C\# Code abgefangen und schlussendliche auf der Benutzeroberfläche
+In diesem Beispiel wird ein String in einer Javascript-Methode erzeugt und zurückgegeben. Der
+erzeugte String wird dann im C\# Code abgefangen und auf der Benutzeroberfläche
 angezeigt.
 
 \lstinputlisting[language=JavaScript,caption={Javascript-Methode generateString},

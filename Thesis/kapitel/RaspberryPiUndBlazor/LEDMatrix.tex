@@ -1,13 +1,13 @@
 \subsection{LED-Matrix ansteuern}
 \label{subsec:ledMatrix}
-In dieser Sektion soll nun eine \emph{8x8 Button-Matrix} erstellt werden, die die \emph{8x8
+In dieser Sektion soll eine \emph{8x8 Button-Matrix} erstellt werden, die die \emph{8x8
 LED-Matrix} auf dem Sensehat des Raspberry Pi repräsentieren soll. Dabei soll der vorhandene
-Joystick auf dem Sensehat dazu genutzt werden, um über die Button-Matrix zu navigieren und die
-LED zu platzieren.
+Joystick auf dem Sensehat genutzt werden, um über die Button-Matrix zu navigieren und die
+LEDs zu platzieren.
 \newline
 \newline
 Da Blazor die \emph{Razor-Syntax} verwendet, kann jegliche C\# Kontrollstruktur im
-\emph{HTML-Markup} verwendet werden. So kann dies auch wie folgt genutzt werden, um die \emph{8x8
+\emph{HTML-Markup} verwendet werden. So kann dies wie folgt genutzt werden, um die \emph{8x8
 Button-Matrix} zu erzeugen:
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Button-Matrix,
@@ -25,12 +25,12 @@ Button-Matrix} zu erzeugen:
 </div>
 \end{lstlisting}
 
-Das \emph{@classes} Element ist ein Zwei-Dimensional Array aus Strings, mit der
-Css-Klassen hinzugefügt und wieder gelöscht werden sollen. Um zu ermitteln, welcher
+Das \emph{@classes} Element ist ein Zwei-Dimensionales Array aus Strings, mit der
+CSS-Klassen hinzugefügt und wieder gelöscht werden sollen. Um zu ermitteln, welcher
 Joystick-Button betätigt wurde, soll ein weiterer
 \emph{Timer} zum Einsatz kommen. Dieser Timer soll alle 15 Millisekunden ausgelöst werden.
 
-\begin{lstlisting}[language={[Sharp]C}, caption=Timer: ButtonTimer,
+\begin{lstlisting}[language={[Sharp]C}, caption=Timer: _setButtonTimer,
     label=lst:ButtonTimer]
     private void StartTimer()
     {
@@ -68,14 +68,14 @@ Joystick-Button betätigt wurde, soll ein weiterer
 \end{lstlisting}
 
 Bei \emph{JoystickState} handelt es sich um ein Enum, welches den \emph{State} des Joysticks
-repräsentieren soll. Wie zu sehen ist, wird der aktuelle \emph{State} des Joysticks gelesen um,
-dann das Ergebnis in einen \emph{Channel} zu schreiben.
+repräsentieren soll. Wie zu sehen ist, wird der aktuelle \emph{State} des Joysticks gelesen, um
+das Ergebnis in einen \emph{Channel} zu schreiben.
 \newline
 \newline
 Für die Verarbeitung des \emph{States}, wird in \emph{OnInitializedAsync} ein Task gestartet, der
-in einer Endlosen schleife läuft und darauf warte bis etwas in den \emph{Channel} hinzugefügt
-wurde. Sobald sich der \emph{State} geändert hat, wird entweder die Position berechnet oder
-die LED an dieser Position neu eingefärbt.
+in einer Endlosschleife läuft und darauf warte bis etwas in den \emph{Channel} hinzugefügt
+wird. Sobald sich der \emph{State} geändert hat, wird entweder die Position berechnet oder
+die LED an dieser Position leuchtet in einer neuen Farbe.
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Task zum Verarbeiten des States,
     label=lst:StateTask]
@@ -124,8 +124,8 @@ die LED an dieser Position neu eingefärbt.
     }
 \end{lstlisting}
 
-Wie zu sehen ist, wird die LED und der Button je
-nach vorherigem Zustand entweder Blau oder Rot. Die komplette Anwendung sieht dann wie folgt aus:
+Wie zu erkennen ist, wird die LED und der Button je
+nach vorherigem Zustand entweder Blau oder Rot. Die entstandene Anwendung sieht dann wie folgt aus:
 
 \begin{figure}[h]
     \centering

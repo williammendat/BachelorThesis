@@ -1,19 +1,19 @@
 \subsection{Raspberry Pi und Qt}
 \label{subsec:rasPiUndQt}
-Nachde ein grober Überblick zu Qt geschaffen wurde, soll nun eine beispielhafte Anwendung
-mithilfe von Qt auf dem Raspberry Pi implementiert werden. Bei dieser Anwendung sollen beim
-Betätigen eines Buttons Daten von dem Raspberry Pi gelesen werden und auf der \ac{gui} angezeigt
+Nachdem ein grober Überblick zu Qt geschaffen wurde, soll eine beispielhafte Anwendung
+mithilfe von Qt auf dem Raspberry Pi implementiert werden. Bei dieser Anwendung soll beim
+Betätigen eines Buttons, Daten von dem Raspberry Pi gelesen werden und auf der \ac{gui} angezeigt
 werden. Dieses Beispiel ist von dem Embedded Systems 2 Labor inspiriert.
 
 \subsubsection{RTIMULib}
 \label{subsubsec:RTIMULib}
 Die RTIMU Bibliothek war anfändlich dazu gedacht, mithilfe von C++ oder
-Python Daten von einem Non-Deeply Embedded System zu lesen. Mitlerweile existiert diese
+Python Daten von einem Non-Deeply Embedded System zu lesen. Mittlerweile existiert diese
 Bibliothek auch für andere Sprachen wie zum Beispiel C\#.
 \newline
 \newline
-Mithilfe dieser Bibliothek sollen für dieses Beispiel die Daten von dem Raspberry Pi gelesen
-werden, um diese dann anschließend auf der \ac{gui} anzeigen zu können. Um RTIMU in einem QT
+Mithilfe dieser Bibliothek soll für dieses Beispiel die Daten von dem Raspberry Pi gelesen
+werden, um diese anschließend auf der \ac{gui} anzeigen zu können. Um RTIMU in einem QT
 Projekt nutzen zu können, muss die Bibliothek zunächst in der \emph{.pro} Datei eingebunden
 werden. Dies geschieht, indem die Zeile \emph{LIBS += -lRTIMULib} hinzugefügt wird.
 
@@ -45,9 +45,9 @@ public:
 
 \end{lstlisting}
 
-Die Klasse enthält neben dem im Listing \ref{lst:Hilfsklasse} gezeigten Code noch weitere
-Methoden, um auf die privaten \emph{Member Variablen} zuzugreifen. Nun müssen im Konstruktor noch
-die Variablen konfiguriert und initialisiert werden, dies geschieht folgendermaßen:
+Die Klasse enthält neben den im Listing \ref{lst:Hilfsklasse} gezeigten Code weitere
+Methoden, um auf die privaten \emph{Member Variablen} zuzugreifen. Zudem müssen im Konstruktor
+die Variablen konfiguriert und initialisiert werden. Dies geschieht folgendermaßen:
 
 \begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse-Konstruktor,
     label=lst:HilfsklasseKonstruktor]
@@ -68,7 +68,7 @@ ReadData::ReadData()
 
 \end{lstlisting}
 
-Die letzte Komponente der Hilfsklasse, bildet die \emph{vRead} Methode ab, in der dann
+Die letzte Komponente der Hilfsklasse, bildet die \emph{vRead} Methode ab, in der
 schlussendlich die Daten gelesen werden:
 
 \begin{lstlisting}[language=C++, caption=RTIMU-Hilfsklasse mit der Methode vRead,
@@ -97,8 +97,8 @@ void ReadData::vRead(void)
 \subsubsection{Benutzeroberfläche}
 \label{subsubsec:QtGui}
 Die Benutzeroberfläche in diesem Beispiel wurde schlicht gehalten. Sie besitzt insgesamt zwölf
-QtLabels wovon sechs dafür gedacht sind, um die Raspberry Pi Daten abzubilden und einem Button,
-der die Daten abrufen soll.
+QtLabels, wovon sechs dafür gedacht sind, um die Raspberry Pi Daten abzubilden. Weitergehend
+enthält das Beispiel einen Button, der die Daten abrufen soll.
 \newline
 \newline
 Der Button wurde mit einem Slot versehen der aufgerufen wird, wenn der Button betätigt wird. In
@@ -132,7 +132,7 @@ void MainWindow::on_pbUpdate_clicked()
 
 \end{lstlisting}
 
-Das vollständige Programm ist in der folgenden Abbildung dargestellt
+Das vollständige Programm ist in der folgenden Abbildung dargestellt:
 
 \begin{figure}[h]
     \centering

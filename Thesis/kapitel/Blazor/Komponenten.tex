@@ -1,31 +1,31 @@
 \section{Komponenten}
 \label{subsec:komponenten}
-Anders als es bei Qt der Fall ist, basiert Blazor wie andere Web-Frameworks auf \emph{HTML} und
-\emph{CSS}. Das bedeutet, dass Entwickler*innen auf jedes HTML-Element zugreifen kann, das
-existiert. Weitergehend haben Entwickler*innen noch die möglichkeit auf zusätzliche
+Anders als bei Qt der Fall, basiert Blazor wie andere Web-Frameworks auf \emph{HTML} und
+\emph{CSS}. Das bedeutet, dass Entwickler*innen auf jedes HTML-Element zugreifen können.
+Weitergehend haben Entwickler*innen noch die Möglichkeit auf zusätzliche
 Komponentenanbieter wie zum Beispiel \emph{MadBlazor} oder \emph{Ignite UI} zurückzugreifen.
 \newline
 \newline
-Außerdem bietet Blazor zusätzlich noch die Möglichkeit eigene Komponenten zu erstellen. Eine
+Außerdem bietet Blazor zusätzlich die Möglichkeit eigene Komponenten zu erstellen. Eine
 Komponente ist ein eigenständiger Teil der Benutzeroberfläche \cite{Komponenten}[vgl.].
-Hinzu komment kann eine Blazor-Komponente, in zwei Varianten
-vorkommen. Einmal als eine \emph{Page-Komponente} und einer \emph{Non-Page-Komponente}.
+Hinzukommend kann eine Blazor-Komponente, in zwei Varianten
+vorkommen. Einmal als eine \emph{Page-Komponente} und eine \emph{Non-Page-Komponente}.
 \begin{itemize}
     \item \emph{Page-Komponente} kann über die URL adressiert werden
-    \item \emph{Non-Page-Komponente} kann nicht adressiert werden \cite{BlazorComponents}[vgl.]
+    \item \emph{Non-Page-Komponente} kann nicht adressiert werden \cite{Komponenten}[vgl.]
 \end{itemize}
 
 \lstinputlisting[language={[Sharp]C},caption={Beispiel einer Page-Komponente},
     label=lst:counterpage]{\srcloc/Blazor/Counter.cs}
 
 Listing \ref{lst:counterpage} zeigt eine Page-Komponete. Bei der Komponente handelt es sich um
-eine Page-Komponenten, da diese mit dem \emph{@page}
+eine Page-Komponente, da diese mit \emph{@page}
 in der ersten Zeile ausgezeichnet ist.
 \newline
 \newline
-Einer Komponente, sei es nun eine Page-Komponente oder Non-Page-Komponente, können auch ein oder
+Einer Komponente kann auch ein oder
 mehrere Parameter von der Oberkomponente mitgegeben werden. Dies hat den Vorteil, dass
-Komponenten mehr an Flexibilität gewinnen und somit besser wiederzuverwenden sind, wie im
+Komponenten mehr an Flexibilität gewinnen und somit besser wiederzuverwenden sind. Wie im
 folgenden Beispiel zu sehen ist:
 \lstinputlisting[language={[Sharp]C},caption={Kindkomponente},
     label=lst:childkomponente]{\srcloc/Blazor/Child.razor}

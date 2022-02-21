@@ -1,7 +1,7 @@
 \subsection{Javascript Invokable}
 \label{subsec:jsInvokable}
-Nun kann es auch den Fall geben, dass C\# code von Javascript aufgerufen werden muss. Dies wird mit
-dem \emph{JSInvokable} Attribut möglich. Die Funktion, die mit dem \emph{JSInvokable} Attribut
+Nun kann es den Fall geben, dass C\# Code von Javascript aufgerufen werden muss. Dies wird mit
+dem \emph{JSInvokable}-Attribut möglich. Die Funktion, die mit dem \emph{JSInvokable}-Attribut
 erweitert wurde, muss zudem mit dem \emph{static-keyword} versehen werden.
 \newline
 \newline
@@ -10,14 +10,14 @@ Javascript-seitig werden von Blazor die Methoden
     \item DotNet.invokeMethod (string, string, object[])
     \item DotNet.invokeMethodAsync (string, string, object[])
 \end{itemize}
-bereitgestellt, mit denen dann eine statische C\#-Methode aufgerufen werden kann. Dabei geben
+bereitgestellt, mit denen eine statische C\#-Methode aufgerufen werden kann. Dabei geben
 Entwickler*innen mithilfe des ersten Parameters, den Project Namen an, in der sich die statische
 Methode befindet. Der zweite Parameter, ist für den Namen der aufzurufenden Methode.
-Zu guter Letzt können mit dem dritten Parameter noch weitere optionale Argumente übergeben werden.
+Mit dem dritten Parameter können weitere optionale Argumente übergeben werden.
 \newline
 \newline
 Im Folgenden wird eine Komponente gezeigt die eine Javascript-Methode aufruft. In der
-Javascript-Methode wird dann wiederum eine C\#-Methode aufgerufen. Das Ergebniss der C\#-Methode
+Javascript-Methode wird wiederum eine C\#-Methode aufgerufen. Das Ergebniss der C\#-Methode
 wird anschließen in einem \emph{alert} angezeigt.
 \newpage
 \lstinputlisting[language={[Sharp]C},caption={Javascript Invokable Beispiel},

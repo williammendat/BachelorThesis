@@ -1,18 +1,18 @@
 \subsection{Erstellen des Projektes}
 \label{subsec:erstellenProject}
-Um die Anwendung zu erstellen, muss der folgende Befehl im Teminal
+Um die Anwendung zu erstellen muss der folgende Befehl im Teminal
 eingegeben werden:
 
 \begin{zitat}
     dotnet new blazorserver -o MyApp --no-https
 \end{zitat}
 
-Dieser Befehl erstellt eine neue Blazor Server Anwendung, mit dem Namen \emph{MyApp} und
-konfiguriert die Anwendung ohne das HTTPS-Protokol. Der Name sowie dass kein Https konfiguriert
+Dieser Befehl erstellt eine neue Blazor Server Anwendung mit dem Namen \emph{MyApp} und
+konfiguriert die Anwendung ohne das HTTPS-Protokol. Der Name sowie dass kein HTTPS konfiguriert
 wird sind optionale Parameter, die nicht mit angegeben werden müssen. Nachdem die Anwendung
-erfolgreich installiert wurde, muss die Codezeile \emph{webBuilder.UseUrls("Http://*:5000");
-} in der \emph{Program.cs} angegeben werden, um die Anwendung für alle Geräte im LAN verfügbar
-ist. Der Code in der \emph{Program.cs} sieht dann folgendermaßen aus:
+erfolgreich erstellt wurde, muss die Codezeile \emph{webBuilder.UseUrls("Http://*:5000");
+} in der \emph{Program.cs}-Datei angegeben werden. Damit wird sichergestellt, dass alle Geräte im
+LAN darauf zugreiffen können. Der Code in der \emph{Program.cs}-Datei sieht dann folgendermaßen aus:
 
 \begin{lstlisting}[language={[Sharp]C}, caption=Program.cs Code,
     label=lst:programCsCode]

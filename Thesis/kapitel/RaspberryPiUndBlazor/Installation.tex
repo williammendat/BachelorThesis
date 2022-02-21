@@ -2,24 +2,25 @@
 \label{sec:installation}
 Da in der vorherigen Sektion \emph{\nameref{sec:entwicklungsumgebung}} Visual Studio Code
 eingerichtet wurde und mit dem Raspberry Pi
-Remote verbunden wurde, kann auch das integrierte Terminal von Visual Studio Code für die
-Installation von .Net Core beziehungsweise .Net verwendet werden.
+Remote verbunden wurde, kann das integrierte Terminal von Visual Studio Code für die
+Installation von .Net Core verwendet werden.
 \newline
 \newline
-Zuallererst muss überprüft werden, ob es sich bei dem Raspberry Pi um die 32-bit oder die 64-bit
-version handelt. Dies kann mit dem befehl \emph{uname -a} überprüft werden. Dabei können folgende
+Im ersten Schritt muss überprüft werden, ob es sich bei dem Raspberry Pi um die 32-bit oder die
+64-bit
+Version handelt. Dies kann mit dem Befehl \emph{uname -a} überprüft werden. Dabei können folgende
 zwei Ergebnisse erfolgen:
 \begin{zitat}
     Linux raspberrypi 4.19.97-v7l+ #1294 SMP Thu Jan 30 13:23:13 GMT 2020 armv7l GNU/Linux
     \newline
     Linux raspberrypi 5.10.60-v8+ #1291 SMP Thu Jan 30 13:21:14 GMT 2020 aarch64 GNU/Linux
 \end{zitat}
-Beim ersten Ergebniss handelt es sich um 32-Bit version und beim zweiten um die 64-Bit version.
+Beim ersten Ergebnis handelt es sich um 32-Bit Version und beim zweiten um die 64-Bit Version.
 \newline
 \newline
 Die jeweilige SDK kann entweder auf der offiziellen Microsoftseite oder in einem Terminal mit dem
-befehl \emph{wget} heruntergeladen werden. Nachdem der Download
-beendet ist, können mit den folgenden Befehlen die Installation beendet werden:
+Befehl \emph{wget} heruntergeladen werden. Nachdem der Download
+beendet ist, kann mit den folgenden Befehlen die Installation beendet werden:
 \begin{zitat}
     mkdir -p \$HOME/dotnet
     \newline
@@ -31,8 +32,7 @@ beendet ist, können mit den folgenden Befehlen die Installation beendet werden:
 \end{zitat}
 
 Diese Befehle erstellen einen neuen Ordner namens \emph{dotnet}, entpacken die SDK und packen den
-Inhalt in den neu erstellten Ordner und setzten zu guter Letzt noch die \emph{Path-Variable} zu
-dem dotnet Ordner.
+Inhalt in den neu erstellten Ordner. Zudem wird die \emph{Path-Variable} zu dem dotnet Ordner.
 \newline
 \newline
 Mit dem Befehl \emph{dotnet --info} kann anschließend überprüft werden, ob die Installation
